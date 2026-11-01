@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import net.minecraft.util.RandomSource;
+import java.util.Random;
 
 public final class DragonVariantSet {
     private final DragonVariant[] variants;
@@ -59,7 +59,7 @@ public final class DragonVariantSet {
         return nameMap;
     }
 
-    public int roll(RandomSource random) {
+    public int roll(Random random) {
         int roll = random.nextInt(totalWeight);
         for (DragonVariant variant : variants) {
             roll -= variant.weight();
