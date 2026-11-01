@@ -68,7 +68,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -1356,7 +1355,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
-        if (isDamageFromCurrentRider(source) && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+        if (isDamageFromCurrentRider(source) && !source.isBypassInvul()) {
             return false;
         }
 
@@ -1399,7 +1398,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
     protected final void rememberIncomingProjectile(DamageSource source) {
         if (!level().isClientSide
                 && (!isDamageFromCurrentRider(source)
-                || source.is(DamageTypeTags.BYPASSES_INVULNERABILITY))
+                || source.isBypassInvul())
                 && source.getDirectEntity() instanceof Projectile projectile) {
             DragonInvestigation.rememberProjectileOrigin(this, projectile);
         }
