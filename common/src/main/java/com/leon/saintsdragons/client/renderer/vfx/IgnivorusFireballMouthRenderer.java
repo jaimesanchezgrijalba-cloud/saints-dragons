@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.particle.CindervaneFireTrailParticle;
 import com.leon.saintsdragons.client.particle.FireBreathBackblastParticle;
 import com.leon.saintsdragons.client.particle.IgnivorusChargedFireballTrailParticle;
@@ -12,7 +14,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Map;
@@ -280,7 +281,7 @@ public final class IgnivorusFireballMouthRenderer {
             if (time < 0.0F) continue;
             int cycle = (int) (time / 8.0F);
             float progress = (time % 8.0F) / 8.0F;
-            var random = RandomSource.create(dragon.getUUID().getLeastSignificantBits()
+            var random = new Random(dragon.getUUID().getLeastSignificantBits()
                     ^ (i * 73428767L) ^ (cycle * 912931L));
             double azimuth = random.nextDouble() * Math.PI * 2.0D;
             double vertical = random.nextDouble() * 2.0D - 1.0D;

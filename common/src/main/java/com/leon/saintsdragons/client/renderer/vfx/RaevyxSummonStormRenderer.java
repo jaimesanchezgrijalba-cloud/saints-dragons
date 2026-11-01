@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.renderer.ShaderPassCompatibility;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.registry.ModParticles;
@@ -12,7 +14,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -104,7 +105,7 @@ public final class RaevyxSummonStormRenderer {
         double halfX = bounds.getXsize() * 0.5;
         double halfY = bounds.getYsize() * 0.5;
         double halfZ = bounds.getZsize() * 0.5;
-        RandomSource random = RandomSource.create(dragon.getUUID().getLeastSignificantBits() ^ castStart);
+        Random random = new Random(dragon.getUUID().getLeastSignificantBits() ^ castStart);
         for (int i = 0; i < 264; i++) {
             double angle = random.nextDouble() * Math.PI * 2;
             double vertical = 0.05 + random.nextDouble() * 0.7;
@@ -151,7 +152,7 @@ public final class RaevyxSummonStormRenderer {
             float boltAge = time % OUTWARD_BOLT_TICKS;
             long seed = dragon.getUUID().getLeastSignificantBits()
                     ^ (slot * 73428767L) ^ (cycle * 912931L);
-            RandomSource random = RandomSource.create(seed);
+            Random random = new Random(seed);
             double angle = random.nextDouble() * Math.PI * 2;
             double up = 0.1D + random.nextDouble() * 0.65D;
             double horizontal = Math.sqrt(1 - up * up);
@@ -213,7 +214,7 @@ public final class RaevyxSummonStormRenderer {
             if (localAge < 0) continue;
             int cycle = Mth.floor(localAge / 12.0F);
             float progress = (localAge % 12.0F) / 12.0F;
-            RandomSource random = RandomSource.create(dragon.getUUID().getLeastSignificantBits()
+            Random random = new Random(dragon.getUUID().getLeastSignificantBits()
                     ^ (i * 73428767L) ^ (cycle * 912931L));
             double angle = random.nextDouble() * Math.PI * 2;
             double vertical = random.nextDouble() * 2 - 1;

@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.renderer.ShaderPassCompatibility;
 import com.leon.saintsdragons.common.registry.ModParticles;
 import com.leon.saintsdragons.server.entity.dragons.raevyx.Raevyx;
@@ -8,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -61,7 +62,7 @@ public final class RaevyxStormLightningRenderer {
                        int tick, int lifetime, long seed, boolean outward) {}
     private static final class State {
         final List<Arc> arcs = new ArrayList<>();
-        final RandomSource random = RandomSource.create();
+        final Random random = new Random();
         int lastTick = -1;
         int nextBody;
         int nextGround;
@@ -178,7 +179,7 @@ public final class RaevyxStormLightningRenderer {
         }
     }
 
-    private static Anchor anchor(String bone, BakedGeoModel model, Map<String, Matrix4f> transforms, RandomSource random) {
+    private static Anchor anchor(String bone, BakedGeoModel model, Map<String, Matrix4f> transforms, Random random) {
         var faces = DragonBoneSurfaceSampler.animatedSurfaces(model, transforms, new String[][] {{bone}});
         if (faces.isEmpty()) return null;
         double total = faces.get(faces.size() - 1).cumulativeArea();
@@ -188,11 +189,11 @@ public final class RaevyxStormLightningRenderer {
         return new Anchor(bone, new Vec3(local.x, local.y, local.z));
     }
 
-    static void impact(Raevyx dragon, Vec3 point, RandomSource random) {
+    static void impact(Raevyx dragon, Vec3 point, Random random) {
         impact(dragon, point, random, false);
     }
 
-    static void impact(Raevyx dragon, Vec3 point, RandomSource random, boolean largeImpact) {
+    static void impact(Raevyx dragon, Vec3 point, Random random, boolean largeImpact) {
         boolean gold = dragon.getTextureVariant() == Raevyx.VARIANT_NIGHT_GOLD;
         int count = largeImpact ? 64 : 8;
         double spread = largeImpact ? 1.8D : 0.3D;

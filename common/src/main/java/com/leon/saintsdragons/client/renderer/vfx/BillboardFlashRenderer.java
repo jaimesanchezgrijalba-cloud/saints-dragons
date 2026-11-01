@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -10,7 +12,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
@@ -30,7 +31,7 @@ public final class BillboardFlashRenderer {
         visibility = Mth.clamp(visibility, 0.0F, 1.0F);
         float lifetime = Math.max(0.5F, style.lifetimeTicks());
         float period = lifetime + Math.max(0.0F, style.delayTicks());
-        RandomSource phaseRandom = RandomSource.create(seed);
+        Random phaseRandom = new Random(seed);
         float cycleTime = Math.max(0.0F, ageInTicks) + phaseRandom.nextFloat() * period;
         long cycle = Mth.floor(cycleTime / period);
         float timeInCycle = Mth.frac(cycleTime / period) * period;
@@ -45,7 +46,7 @@ public final class BillboardFlashRenderer {
         if (alpha <= 0.01F || halfSize <= 0.001F) {
             return;
         }
-        RandomSource random = RandomSource.create(seed ^ CYCLE_SEED * (cycle + 1L));
+        Random random = new Random(seed ^ CYCLE_SEED * (cycle + 1L));
         float startingAngle = random.nextFloat() * Mth.TWO_PI;
         float turns = random.nextBoolean() ? style.turns() : -style.turns();
         float angle = startingAngle + turns * Mth.TWO_PI * life;
