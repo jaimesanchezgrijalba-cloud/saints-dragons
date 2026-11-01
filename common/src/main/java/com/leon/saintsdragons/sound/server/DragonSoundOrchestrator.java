@@ -5,7 +5,7 @@ import com.leon.saintsdragons.common.network.NetworkHandler;
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import com.leon.saintsdragons.sound.api.DragonSoundMode;
 import com.leon.saintsdragons.sound.api.DragonSoundSpec;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ public final class DragonSoundOrchestrator {
         if (dragon.level().isClientSide) {
             return;
         }
-        var soundId = BuiltInRegistries.SOUND_EVENT.getKey(spec.sound());
+        var soundId = Registry.SOUND_EVENT.getKey(spec.sound());
         if (soundId == null) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Sound event not registered for dragon {}: {}", dragon.getId(), spec.sound());
