@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.item.MossbackItem;
 import com.leon.saintsdragons.common.registry.ModEntities;
 import com.leon.saintsdragons.util.animation.AnimationHelper;
@@ -18,7 +20,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -112,7 +113,7 @@ public class Mossback extends Animal implements TickingGeoEntity {
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         return Animal.checkAnimalSpawnRules(type, level, spawnType, pos, random);
     }
 
@@ -206,7 +207,7 @@ public class Mossback extends Animal implements TickingGeoEntity {
             return;
         }
 
-        RandomSource random = this.getRandom();
+        Random random = this.getRandom();
         for (int i = 0; i < TOXIN_PARTICLES; i++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
             double speed = 0.035D + random.nextDouble() * 0.085D;

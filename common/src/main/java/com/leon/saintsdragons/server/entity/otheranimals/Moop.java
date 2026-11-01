@@ -1,10 +1,11 @@
 package com.leon.saintsdragons.server.entity.otheranimals;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
@@ -51,7 +52,7 @@ public class Moop extends AbstractFish implements GeoEntity {
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(type, level, spawnType, pos, random);
     }
 

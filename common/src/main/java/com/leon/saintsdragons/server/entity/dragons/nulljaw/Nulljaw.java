@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.nulljaw;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.NulljawStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 
@@ -42,7 +44,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -232,7 +233,7 @@ public class Nulljaw extends RideableFlyingDragon implements PackMember<Nulljaw>
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         if (DragonSpawnRules.isNaturalWildSpawn(spawnType)
                 && !level.getBiome(pos).is(Biomes.END_BARRENS)) {
             return false;

@@ -1,7 +1,8 @@
 package com.leon.saintsdragons.server.flight;
 
+import java.util.Random;
+
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 public final class DragonFlightEffort {
@@ -15,7 +16,7 @@ public final class DragonFlightEffort {
 
     public void tick(Vec3 measuredMotion, double cruiseSpeed, double requestedSpeed,
                      boolean riderControlled, boolean sprintRequested, boolean holdingDiveMomentum,
-                     boolean diving, RandomSource random, Profile profile) {
+                     boolean diving, Random random, Profile profile) {
         double referenceSpeed = Math.max(0.1D, cruiseSpeed);
         double previousSpeed = motion.length();
         motion = motion.lerp(measuredMotion, 0.35D);
@@ -91,7 +92,7 @@ public final class DragonFlightEffort {
         }
     }
 
-    private double applyCruiseFlaps(double target, boolean cruising, RandomSource random, Profile profile) {
+    private double applyCruiseFlaps(double target, boolean cruising, Random random, Profile profile) {
         if (!cruising) {
             resetCruiseCycle();
             return target;

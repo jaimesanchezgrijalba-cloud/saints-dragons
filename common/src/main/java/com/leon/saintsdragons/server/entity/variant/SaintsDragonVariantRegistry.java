@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.variant;
 
+import java.util.Random;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
@@ -9,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -238,7 +239,7 @@ public final class SaintsDragonVariantRegistry {
         return new ResourceLocation(variantId.getNamespace(), "textures/entity/" + dragonPath + "/" + variantPath + suffix + ".png");
     }
 
-    private static ResourceLocation roll(RandomSource random, List<DragonVariantDefinition> variants, ResourceLocation fallback) {
+    private static ResourceLocation roll(Random random, List<DragonVariantDefinition> variants, ResourceLocation fallback) {
         int total = 0;
         for (DragonVariantDefinition definition : variants) {
             total += definition.weight();
