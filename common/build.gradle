@@ -33,7 +33,7 @@ dependencies {
     compileOnly "com.eliotlash.mclib:mclib:20"
 
     // Optional JEI integration. The API is available to compile against but is never bundled.
-    modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}:${rootProject.jei_version}"
+    modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}"
 
 
     // JSR305 for @Nullable/@Nonnull annotations
