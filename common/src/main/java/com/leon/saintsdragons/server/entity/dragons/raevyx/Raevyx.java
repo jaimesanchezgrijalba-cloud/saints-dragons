@@ -1,7 +1,7 @@
 // zap van dink
+package com.leon.saintsdragons.server.entity.dragons.raevyx;
 
 import java.util.Random;
-package com.leon.saintsdragons.server.entity.dragons.raevyx;
 
 import com.leon.saintsdragons.server.entity.component.DragonBreathPose;
 
