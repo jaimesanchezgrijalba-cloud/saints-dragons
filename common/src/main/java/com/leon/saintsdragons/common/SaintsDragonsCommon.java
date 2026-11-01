@@ -24,6 +24,8 @@ public final class SaintsDragonsCommon {
     }
 
     public static synchronized void init() {
+        // GeckoLib 3 requires explicit initialization from the mod bootstrap.
+        GeckoLib.initialize();
         SaintsDragonsConfig.bootstrap();
         ToolsArmorConfig.bootstrap();
         DragonAttributeConfigLoader.bootstrap();
