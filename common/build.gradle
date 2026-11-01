@@ -25,8 +25,8 @@ dependencies {
     // Keep it compileOnly so Forge classpaths stay clean at runtime.
     compileOnly "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
 
-    // Compile shared sources against the Forge 1.18.2 GeckoLib API using Loom mod remapping.
-    modCompileOnly "software.bernie.geckolib:geckolib-forge-1.18:${rootProject.geckolib_version}"
+    // Common source compilation uses the same Forge GeckoLib variant as the platform module.
+    modImplementation "software.bernie.geckolib:geckolib-forge-1.18:${rootProject.geckolib_version}"
 
     // The animation sampler uses GeckoLib's MCLib math types directly.
     // GeckoLib provides MCLib at runtime; expose it explicitly for common compilation.
