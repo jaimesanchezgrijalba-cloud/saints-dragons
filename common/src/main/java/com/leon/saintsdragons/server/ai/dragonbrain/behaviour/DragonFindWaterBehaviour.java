@@ -14,7 +14,7 @@ import com.leon.saintsdragons.server.entity.interfaces.SemiAquaticDragon;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
+import java.util.Random;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -156,7 +156,7 @@ public final class DragonFindWaterBehaviour<T extends RideableDragonBase & SemiA
     @Nullable
     private BlockPos findWater(DragonBrainContext<T> context) {
         T dragon = context.dragon();
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         int range = Math.max(1, dragon.getWaterSearchRange());
         var remembered = context.utilities().destinations().known(WATER_ENTRY, context.level(), dragon.blockPosition(),
                 range, position -> validWater(context, position));
