@@ -3,7 +3,7 @@ package com.leon.saintsdragons.server.entity.effect.stegonaut;
 import com.leon.saintsdragons.common.registry.ModEntities;
 import com.leon.saintsdragons.server.entity.dragons.stegonaut.Stegonaut;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
@@ -185,7 +185,7 @@ public class StegonautGroundChunkEntity extends Entity {
         this.impactRadius = tag.getDouble("ImpactRadius");
         this.impactDamage = tag.getFloat("ImpactDamage");
         if (tag.contains("BlockState", CompoundTag.TAG_COMPOUND) && level() instanceof ServerLevel server) {
-            BlockState state = NbtUtils.readBlockState(server.holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
+            BlockState state = NbtUtils.readBlockState(serverRegistry.BLOCK, tag.getCompound("BlockState"));
             setBlockState(state.isAir() ? Blocks.DIRT.defaultBlockState() : state);
         }
         if (tag.contains("Scale")) {

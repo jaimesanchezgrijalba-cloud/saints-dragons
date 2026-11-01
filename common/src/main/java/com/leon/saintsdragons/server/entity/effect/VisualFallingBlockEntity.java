@@ -1,6 +1,6 @@
 package com.leon.saintsdragons.server.entity.effect;
 
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
@@ -77,7 +77,7 @@ public class VisualFallingBlockEntity extends Entity {
 
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
-        this.setBlockState(NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState")));
+        this.setBlockState(NbtUtils.readBlockState(this.level()Registry.BLOCK, tag.getCompound("BlockState")));
         this.lifetime = tag.getInt("Lifetime");
     }
 

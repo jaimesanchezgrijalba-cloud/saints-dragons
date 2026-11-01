@@ -8,7 +8,7 @@ import com.leon.saintsdragons.server.ai.dragonbrain.learning.DragonCombatLearnin
 import com.leon.saintsdragons.server.entity.dragons.util.DragonElementalImmunity;
 import com.leon.saintsdragons.server.entity.dragons.util.DragonGriefingRules;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
@@ -443,7 +443,7 @@ public class IgnivorusFireballEntity extends Entity implements GeoEntity {
         this.impactRadius = tag.getDouble("ImpactRadius");
         this.impactDamage = tag.getFloat("ImpactDamage");
         if (tag.contains("BlockState", CompoundTag.TAG_COMPOUND) && level() instanceof ServerLevel server) {
-            BlockState state = NbtUtils.readBlockState(server.holderLookup(Registries.BLOCK), tag.getCompound("BlockState"));
+            BlockState state = NbtUtils.readBlockState(serverRegistry.BLOCK, tag.getCompound("BlockState"));
             setBlockState(state.isAir() ? Blocks.MAGMA_BLOCK.defaultBlockState() : state);
         }
         if (tag.contains("Scale")) {

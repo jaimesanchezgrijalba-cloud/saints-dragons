@@ -2,7 +2,7 @@ package com.leon.saintsdragons.server.entity.effect.volitans;
 
 import com.leon.saintsdragons.common.registry.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.Packet;
@@ -134,7 +134,7 @@ public class VolitansGroundChunkEntity extends Entity implements GeoEntity {
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag tag) {
         if (tag.contains("BlockState", CompoundTag.TAG_COMPOUND)) {
-            setBlockState(NbtUtils.readBlockState(level().holderLookup(Registries.BLOCK), tag.getCompound("BlockState")));
+            setBlockState(NbtUtils.readBlockState(level()Registry.BLOCK, tag.getCompound("BlockState")));
         }
         if (tag.contains("Yaw")) {
             initializeRotation(tag.getFloat("Yaw"));
