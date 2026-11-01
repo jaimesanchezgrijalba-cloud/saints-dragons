@@ -56,7 +56,7 @@ import com.leon.saintsdragons.util.math.SmoothValue;
 import com.leon.saintsdragons.util.animation.TickingGeoEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -344,7 +344,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
         }
 
         ResourceLocation soundId = null;
-        ResourceLocation entityTypeId = BuiltInRegistries.ENTITY_TYPE.getKey(getType());
+        ResourceLocation entityTypeId = Registry.ENTITY_TYPE.getKey(getType());
         if ("step".equals(soundKey) && entityTypeId != null) {
             soundId = new ResourceLocation(entityTypeId.getNamespace(), entityTypeId.getPath() + "_step");
         } else if (soundKey.endsWith("_step") && entityTypeId != null) {
@@ -354,7 +354,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
         }
 
         if (soundId != null) {
-            SoundEvent sound = soundId != null ? BuiltInRegistries.SOUND_EVENT.get(soundId) : null;
+            SoundEvent sound = soundId != null ? Registry.SOUND_EVENT.get(soundId) : null;
             if (sound != null) {
                 getSoundHandler().playClientSound(this, position(), sound, 1.0f, 1.0f);
                 return;
@@ -544,7 +544,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
     @Override
     public RawAnimation getDanceAnimation() {
         if (cachedDanceAnimation == null) {
-            ResourceLocation entityTypeId = BuiltInRegistries.ENTITY_TYPE.getKey(getType());
+            ResourceLocation entityTypeId = Registry.ENTITY_TYPE.getKey(getType());
             String dragonName = entityTypeId != null ? entityTypeId.getPath() : "dragon";
             cachedDanceAnimation = AnimationHelper.loop(dragonName, AnimationHelper.DANCE);
         }
