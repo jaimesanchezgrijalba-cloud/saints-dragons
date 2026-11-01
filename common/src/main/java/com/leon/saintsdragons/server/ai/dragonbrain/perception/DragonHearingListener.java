@@ -6,58 +6,36 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
-import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.gameevent.EntityPositionSource;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.gameevent.GameEventListener;
-import net.minecraft.world.level.gameevent.PositionSource;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.UUID;
 
-public final class DragonHearingListener implements GameEventListener {
+public final class DragonHearingListener {
     private static final float MIN_CONFIDENCE = 0.08F;
     private static final double MIN_PROJECTILE_DANGER_RADIUS = 6.0D;
     private static final double PROJECTILE_DANGER_VERTICAL_RADIUS = 4.0D;
 
     private final DragonEntity dragon;
-    private final PositionSource positionSource;
-
     public DragonHearingListener(DragonEntity dragon) {
         this.dragon = dragon;
-        this.positionSource = new EntityPositionSource(dragon, dragon.getEyeHeight() * 0.5F);
     }
 
-    @Override
-    public PositionSource getListenerSource() {
-        return positionSource;
-    }
-
-    @Override
-    public int getListenerRadius() {
-        return DragonPerceptionProfile.forDragon(dragon).hearingRange();
-    }
-
-    @Override
-    public DeliveryMode getDeliveryMode() {
-        return DeliveryMode.BY_DISTANCE;
-    }
-
-    @Override
     public boolean handleGameEvent(ServerLevel level,
                                    GameEvent event,
-                                   GameEvent.Context eventContext,
-                                   Vec3 eventPosition) {
+                                   Entity eventSource,
+                                   BlockPos eventPosition) {
+        Vec3 eventPositionVec = Vec3.atCenterOf(eventPosition);
         if (!dragon.isAlive() || dragon.isDying() || dragon.isRemoved()) {
             return false;
         }
 
-        Entity eventSource = eventContext.sourceEntity();
         Entity source = perceivedSource(eventSource);
         if (eventSource == dragon
                 || source == dragon
@@ -73,7 +51,7 @@ public final class DragonHearingListener implements GameEventListener {
         }
 
         DragonPerceptionProfile profile = DragonPerceptionProfile.forDragon(dragon);
-        double distance = dragon.getEyePosition().distanceTo(eventPosition);
+        double distance = dragon.getEyePosition().distanceTo(eventPositionVec);
         double effectiveRange = profile.hearingRange() * (0.35D + stimulus.loudness() * 0.65D);
         if (distance > effectiveRange) {
             return false;
@@ -85,7 +63,7 @@ public final class DragonHearingListener implements GameEventListener {
                 && source.isSteppingCarefully()) {
             confidence *= 0.35F;
         }
-        if (isObstructed(level, eventPosition)) {
+        if (isObstructed(level, eventPositionVec)) {
             confidence *= 0.45F;
         }
         if (confidence < MIN_CONFIDENCE) {
@@ -108,7 +86,7 @@ public final class DragonHearingListener implements GameEventListener {
         // Preserve that visual evidence instead of replacing it with the landing sound.
         boolean rememberedProjectileOrigin = event == GameEvent.PROJECTILE_LAND
                 && eventSource instanceof Projectile projectile
-                && isDangerousProjectileImpact(eventPosition)
+                && isDangerousProjectileImpact(eventPositionVec)
                 && dragon.getVision().observeProjectileImpact(projectile, false);
 
         int ttl = Math.max(20, Math.round(profile.soundMemoryTicks() * stimulus.memoryMultiplier()));
@@ -166,8 +144,8 @@ public final class DragonHearingListener implements GameEventListener {
                 return current;
             }
             Entity owner = null;
-            if (current instanceof TraceableEntity traceable) {
-                owner = traceable.getOwner();
+            if (current instanceof Projectile projectile) {
+                owner = projectile.getOwner();
             }
             if (owner == null && current instanceof OwnableEntity ownable) {
                 owner = ownable.getOwner();
@@ -198,7 +176,7 @@ public final class DragonHearingListener implements GameEventListener {
         Vec3 origin = dragon.getEyePosition();
         HitResult result = level.clip(new ClipContext(
                 origin,
-                eventPosition,
+                eventPositionVec,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
                 dragon
@@ -225,10 +203,10 @@ public final class DragonHearingListener implements GameEventListener {
         if (event == GameEvent.EXPLODE || event == GameEvent.LIGHTNING_STRIKE) {
             return new Stimulus(DragonSensoryObservation.Kind.EXPLOSION, 1.0F, 1.5F, true);
         }
-        if (event == GameEvent.ENTITY_ROAR || event == GameEvent.SHRIEK) {
+        if (event == GameEvent.RAVAGER_ROAR) {
             return new Stimulus(DragonSensoryObservation.Kind.ROAR, 0.95F, 1.35F, true);
         }
-        if (event == GameEvent.ENTITY_DAMAGE || event == GameEvent.ENTITY_DIE) {
+        if (event == GameEvent.ENTITY_DAMAGED || event == GameEvent.ENTITY_KILLED) {
             return new Stimulus(DragonSensoryObservation.Kind.COMBAT, 0.85F, 1.25F, true);
         }
         if (event == GameEvent.HIT_GROUND) {
@@ -243,13 +221,10 @@ public final class DragonHearingListener implements GameEventListener {
         if (event == GameEvent.BLOCK_OPEN || event == GameEvent.BLOCK_CLOSE) {
             return new Stimulus(DragonSensoryObservation.Kind.BLOCK, 0.65F, 1.0F, false);
         }
-        if (event == GameEvent.TELEPORT) {
-            return new Stimulus(DragonSensoryObservation.Kind.TELEPORT, 0.70F, 1.0F, true);
-        }
         if (event == GameEvent.SPLASH || event == GameEvent.SWIM) {
             return new Stimulus(DragonSensoryObservation.Kind.SPLASH, 0.50F, 0.75F, false);
         }
-        if (event == GameEvent.STEP || event == GameEvent.FLAP || event == GameEvent.ELYTRA_GLIDE) {
+        if (event == GameEvent.STEP || event == GameEvent.FLAP || event == GameEvent.ELYTRA_FREE_FALL) {
             return new Stimulus(DragonSensoryObservation.Kind.STEP, 0.30F, 0.65F, false);
         }
         return null;

@@ -50,7 +50,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import com.leon.saintsdragons.util.math.SmoothValue;
@@ -98,7 +97,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.gameevent.DynamicGameEventListener;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -188,8 +186,7 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
     }
 
     private final DragonAiCombatPacingComponent aiCombatPacing = new DragonAiCombatPacingComponent();
-    private final DynamicGameEventListener<DragonHearingListener> hearingListener =
-            new DynamicGameEventListener<>(new DragonHearingListener(this));
+    private final DragonHearingListener hearingListener = new DragonHearingListener(this);
 
     private final SmoothValue fallbackBodyRotDeviation = SmoothValue.rotation(0.0);
     private final SmoothValue fallbackPitchDeviation = SmoothValue.rotation(0.0);
@@ -274,13 +271,10 @@ public abstract class DragonEntity extends TamableAnimal implements TickingGeoEn
         return this.waterPathController;
     }
 
-    @Override
-    public void updateDynamicGameEventListener(
-            BiConsumer<DynamicGameEventListener<?>, ServerLevel> listenerConsumer) {
-        super.updateDynamicGameEventListener(listenerConsumer);
-        if (getBrain().checkMemory(DragonMemories.HEARD_STIMULUS, MemoryStatus.REGISTERED)
-                && level() instanceof ServerLevel serverLevel) {
-            listenerConsumer.accept(hearingListener, serverLevel);
+    public void handleHeardGameEvent(ServerLevel serverLevel, net.minecraft.world.level.gameevent.GameEvent event,
+                                     @Nullable Entity source, BlockPos eventPosition) {
+        if (getBrain().checkMemory(DragonMemories.HEARD_STIMULUS, MemoryStatus.REGISTERED)) {
+            hearingListener.handleGameEvent(serverLevel, event, source, eventPosition);
         }
     }
 
