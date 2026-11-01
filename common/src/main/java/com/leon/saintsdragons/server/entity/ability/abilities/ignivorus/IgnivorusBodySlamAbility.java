@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.ignivorus;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.IgnivorusStatProfile;
 
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
@@ -15,7 +17,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -169,7 +170,7 @@ public class IgnivorusBodySlamAbility extends DragonAbility<Ignivorus> {
      * Spawns visual falling blocks in rings around the body slam impact
      */
     private void spawnBodySlamBlockEffect(ServerLevel level, Ignivorus dragon, double radius) {
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         BlockPos dragonPos = dragon.blockPosition();
         List<BlockPos> blockPositions = new ArrayList<>();
 
@@ -197,7 +198,7 @@ public class IgnivorusBodySlamAbility extends DragonAbility<Ignivorus> {
      * Spawns dirt particles in expanding rings around the body slam
      */
     private void spawnBodySlamDirtParticles(ServerLevel level, Ignivorus dragon, double radius) {
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         Vec3 dragonPos = dragon.position();
         BlockParticleOption dirtParticles = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState());
 
@@ -216,7 +217,7 @@ public class IgnivorusBodySlamAbility extends DragonAbility<Ignivorus> {
     }
 
     private void addRingPositions(List<BlockPos> positions, BlockPos center, int minRadius, int maxRadius,
-                                   RandomSource random, int count) {
+                                   Random random, int count) {
         for (int i = 0; i < count; i++) {
             double angle = random.nextDouble() * Math.PI * 2;
             double radius = minRadius + random.nextDouble() * (maxRadius - minRadius);
@@ -227,7 +228,7 @@ public class IgnivorusBodySlamAbility extends DragonAbility<Ignivorus> {
         }
     }
 
-    private void spawnBodySlamFallingBlock(ServerLevel level, Ignivorus dragon, BlockPos pos, RandomSource random) {
+    private void spawnBodySlamFallingBlock(ServerLevel level, Ignivorus dragon, BlockPos pos, Random random) {
         BlockPos groundPos = findGroundLevel(level, dragon, pos);
         if (groundPos == null) {
             return;
@@ -258,7 +259,7 @@ public class IgnivorusBodySlamAbility extends DragonAbility<Ignivorus> {
     }
 
     private void spawnParticleRing(ServerLevel level, Vec3 center, BlockParticleOption particleType,
-                                    int minRadius, int maxRadius, int count, RandomSource random, Ignivorus dragon) {
+                                    int minRadius, int maxRadius, int count, Random random, Ignivorus dragon) {
         for (int i = 0; i < count; i++) {
             double angle = random.nextDouble() * Math.PI * 2;
             double radius = minRadius + random.nextDouble() * (maxRadius - minRadius);

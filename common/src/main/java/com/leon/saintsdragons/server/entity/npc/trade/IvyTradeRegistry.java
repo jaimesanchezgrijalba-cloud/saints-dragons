@@ -1,12 +1,13 @@
 package com.leon.saintsdragons.server.entity.npc.trade;
 
+import java.util.Random;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.Item;
@@ -26,7 +27,7 @@ public final class IvyTradeRegistry {
     private IvyTradeRegistry() {
     }
 
-    public static void fillOffers(AbstractVillager trader, RandomSource random, MerchantOffers offers) {
+    public static void fillOffers(AbstractVillager trader, Random random, MerchantOffers offers) {
         for (OfferSource source : datapackSources) {
             source.addOffers(trader, random, offers);
         }
@@ -188,12 +189,12 @@ public final class IvyTradeRegistry {
     }
 
     interface OfferSource {
-        void addOffers(AbstractVillager trader, RandomSource random, MerchantOffers offers);
+        void addOffers(AbstractVillager trader, Random random, MerchantOffers offers);
     }
 
     private record FixedTrade(VillagerTrades.ItemListing listing) implements OfferSource {
         @Override
-        public void addOffers(AbstractVillager trader, RandomSource random, MerchantOffers offers) {
+        public void addOffers(AbstractVillager trader, Random random, MerchantOffers offers) {
             addOffer(listing, trader, random, offers);
         }
     }
@@ -204,7 +205,7 @@ public final class IvyTradeRegistry {
         }
 
         @Override
-        public void addOffers(AbstractVillager trader, RandomSource random, MerchantOffers offers) {
+        public void addOffers(AbstractVillager trader, Random random, MerchantOffers offers) {
             List<WeightedTrade> available = new ArrayList<>(entries);
             for (int rollIndex = 0; rollIndex < rolls; rollIndex++) {
                 int totalWeight = available.stream().mapToInt(WeightedTrade::weight).sum();
@@ -224,7 +225,7 @@ public final class IvyTradeRegistry {
 
     private static void addOffer(VillagerTrades.ItemListing listing,
                                  AbstractVillager trader,
-                                 RandomSource random,
+                                 Random random,
                                  MerchantOffers offers) {
         MerchantOffer offer = listing.getOffer(trader, random);
         if (offer != null) {
@@ -233,7 +234,7 @@ public final class IvyTradeRegistry {
     }
 
     private interface ResultFactory {
-        ItemStack create(RandomSource random);
+        ItemStack create(Random random);
     }
 
     private interface StackFactory extends ResultFactory {
@@ -247,7 +248,7 @@ public final class IvyTradeRegistry {
             }
         }
 
-        private int roll(RandomSource random) {
+        private int roll(Random random) {
             if (min == max) {
                 return min;
             }
@@ -266,7 +267,7 @@ public final class IvyTradeRegistry {
 
     private record ResultPool(List<WeightedResult> entries, int totalWeight) implements ResultFactory {
         @Override
-        public ItemStack create(RandomSource random) {
+        public ItemStack create(Random random) {
             int roll = random.nextInt(totalWeight);
             for (WeightedResult entry : entries) {
                 roll -= entry.weight();

@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.volitans;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.VolitansStatProfile;
 
 import com.leon.saintsdragons.common.registry.ModEntities;
@@ -17,7 +19,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -266,7 +267,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         BlockPos groundPos = findGroundPos(dragon);
         BlockState state = normalizeBurrowBlock(server.getBlockState(groundPos));
         Vec3 origin = VolitansGroundChunkEntity.surfacePosition(groundPos);
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
 
         spawnExitDustColumn(server, origin, random);
         spawnExitBlockParticles(server, origin, state, random);
@@ -274,7 +275,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         spawnExitFallingBlocks(server, origin, state, random);
     }
 
-    private void spawnExitDustColumn(ServerLevel server, Vec3 origin, RandomSource random) {
+    private void spawnExitDustColumn(ServerLevel server, Vec3 origin, Random random) {
         for (int step = 0; step < EXIT_DUST_COLUMN_STEPS; step++) {
             double progress = step / (double) Math.max(EXIT_DUST_COLUMN_STEPS - 1, 1);
             double y = origin.y + progress * EXIT_DUST_COLUMN_HEIGHT;
@@ -299,7 +300,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         }
         BlockPos groundPos = findGroundPos(dragon);
         Vec3 origin = VolitansGroundChunkEntity.surfacePosition(groundPos);
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         for (int i = 0; i < EXIT_LATE_DUST_COUNT; i++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
             double distance = random.nextDouble() * EXIT_LATE_DUST_RADIUS;
@@ -317,7 +318,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         }
     }
 
-    private void spawnExitBlockParticles(ServerLevel server, Vec3 origin, BlockState state, RandomSource random) {
+    private void spawnExitBlockParticles(ServerLevel server, Vec3 origin, BlockState state, Random random) {
         for (int i = 0; i < EXIT_BLOCK_PARTICLE_COUNT; i++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
             double distance = random.nextDouble() * 2.8D;
@@ -334,7 +335,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         }
     }
 
-    private void spawnExitBlockParticleTrails(ServerLevel server, Vec3 origin, BlockState state, RandomSource random) {
+    private void spawnExitBlockParticleTrails(ServerLevel server, Vec3 origin, BlockState state, Random random) {
         BlockParticleOption particle = new BlockParticleOption(ParticleTypes.BLOCK, state);
         for (int i = 0; i < EXIT_BLOCK_TRAIL_PARTICLE_COUNT; i++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
@@ -357,7 +358,7 @@ public class VolitansBurrowAbility extends DragonAbility<Volitans> {
         }
     }
 
-    private void spawnExitFallingBlocks(ServerLevel server, Vec3 origin, BlockState state, RandomSource random) {
+    private void spawnExitFallingBlocks(ServerLevel server, Vec3 origin, BlockState state, Random random) {
         if (state.isAir() || state.liquid() || state.is(Blocks.BEDROCK)) {
             return;
         }

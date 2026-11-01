@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.util;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import com.leon.saintsdragons.server.entity.interfaces.PassiveTreeDestroyer;
 import net.minecraft.core.BlockPos;
@@ -14,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.util.RandomSource;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -357,7 +358,7 @@ public final class DragonDestructionManager {
         }
         BlockPos center = BlockPos.containing(impactPoint);
         int r = (int) Math.ceil(radius);
-        RandomSource random = level.random;
+        Random random = level.random;
         for (BlockPos pos : BlockPos.betweenClosed(center.offset(-r, -r, -r), center.offset(r, r, r))) {
             if (random.nextFloat() > 0.6F) {
                 continue;
