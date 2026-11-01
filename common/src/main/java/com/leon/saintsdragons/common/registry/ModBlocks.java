@@ -1,11 +1,11 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.block.*;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final RegistryHelper.RegistryWrapper<Block> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.BLOCK, () -> BuiltInRegistries.BLOCK, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.BLOCKS, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<Block> RAEVYX_EGG =
             REGISTER.register("raevyx_egg",

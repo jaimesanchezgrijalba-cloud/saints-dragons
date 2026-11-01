@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
@@ -37,8 +39,6 @@ import com.leon.saintsdragons.server.entity.effect.VisualFallingBlockEntity;
 import com.leon.saintsdragons.server.entity.npc.IvyTheDragonMerchant;
 import com.leon.saintsdragons.server.entity.dragons.Mossback;
 import com.leon.saintsdragons.server.entity.otheranimals.Moop;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 
@@ -47,7 +47,7 @@ import java.util.function.Supplier;
 public final class ModEntities {
     private static final RegistryHelper.RegistryWrapper<EntityType<?>> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.ENTITY_TYPE, () -> BuiltInRegistries.ENTITY_TYPE, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.ENTITY_TYPES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<EntityType<Raevyx>> RAEVYX =
             REGISTER.register("raevyx", () -> EntityType.Builder.of(Raevyx::new, MobCategory.CREATURE)

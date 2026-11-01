@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.particle.BloodTempestKatanaRingData;
 import com.leon.saintsdragons.common.particle.GroundDecalParticleData;
@@ -14,15 +16,13 @@ import com.leon.saintsdragons.platform.Services;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 
 import java.util.function.Supplier;
 
 public final class ModParticles {
     private static final RegistryHelper.RegistryWrapper<ParticleType<?>> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.PARTICLE_TYPE, () -> BuiltInRegistries.PARTICLE_TYPE, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.PARTICLE_TYPES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<SimpleParticleType> DRAGONLORD_JUMP_FIRE =
             REGISTER.register("dragonlord_jump_fire", () -> Services.PLATFORM.createSimpleParticle(false));

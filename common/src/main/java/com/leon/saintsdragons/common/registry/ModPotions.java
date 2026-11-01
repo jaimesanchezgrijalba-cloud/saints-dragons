@@ -1,10 +1,10 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.alchemy.Potion;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public final class ModPotions {
     public static final RegistryHelper.RegistryWrapper<Potion> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.POTION, () -> BuiltInRegistries.POTION, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.POTIONS, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<Potion> TIDEGUARD =
             REGISTER.register("tideguard", () -> new Potion(
