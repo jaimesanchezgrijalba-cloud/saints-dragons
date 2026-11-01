@@ -19,11 +19,20 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v4
 
-      - name: Set up Java 17
+      # Loom's current dependency graph requires Java 21 to run Gradle.
+      # The project itself still targets Java 17 via its Gradle toolchain and --release setting.
+      - name: Set up Java 21 runtime and Java 17 toolchain
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: |
+            21
+            17
+
+      - name: Verify Java runtimes
+        run: |
+          java -version
+          ./gradlew --version
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
