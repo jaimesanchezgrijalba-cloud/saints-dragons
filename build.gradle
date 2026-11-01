@@ -26,25 +26,11 @@ publishMods {
         minecraftVersions.add(rootProject.minecraft_version)
     }
 
-    curseforge('curseforgeFabric') {
-        from curseforgeCommon
-        file project(':fabric')
-        modLoaders.add('fabric')
-        requires('fabric-api', 'geckolib')
-    }
-
     curseforge('curseforgeForge') {
         from curseforgeCommon
         file project(':forge')
         modLoaders.add('forge')
         requires('geckolib')
-    }
-
-    modrinth('modrinthFabric') {
-        from modrinthCommon
-        file project(':fabric')
-        modLoaders.add('fabric')
-        requires('fabric-api', 'geckolib')
     }
 
     modrinth('modrinthForge') {
