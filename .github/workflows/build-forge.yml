@@ -15,12 +15,15 @@ concurrency:
 jobs:
   build-forge:
     runs-on: ubuntu-latest
+    env:
+      # Make the Java 17 installation available to Gradle's toolchain detector.
+      ORG_GRADLE_JAVA_INSTALLATIONS_FROM_ENV: JAVA_HOME_17_X64
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
-      # Loom's current dependency graph requires Java 21 to run Gradle.
-      # The project itself still targets Java 17 via its Gradle toolchain and --release setting.
+      # Gradle/Loom's plugin dependency graph needs Java 21 to run.
+      # The project requests Java 17 for compilation; keep that as a separate toolchain.
       - name: Set up Java 21 runtime and Java 17 toolchain
         uses: actions/setup-java@v4
         with:
@@ -29,20 +32,23 @@ jobs:
             21
             17
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
       - name: Verify Java runtimes
         run: |
-          java -version
-          ./gradlew --version
+          "$JAVA_HOME_21_X64/bin/java" -version
+          "$JAVA_HOME_17_X64/bin/java" -version
+          JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH" ./gradlew --version
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
-
       # Baseline compile first: this checks the untouched 1.20.1 source and CI toolchain.
       - name: Compile Forge project
-        run: ./gradlew :forge:build --no-daemon --stacktrace
+        run: |
+          JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH" \
+            ./gradlew :forge:build --no-daemon --stacktrace
 
       - name: Upload Forge JAR
         uses: actions/upload-artifact@v4
