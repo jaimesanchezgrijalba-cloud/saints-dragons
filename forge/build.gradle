@@ -11,6 +11,10 @@ sourceSets {
             srcDir '../common/src/main/java'
             // EMI is not part of the Forge 1.18.2 target.
             exclude 'com/leon/saintsdragons/client/compat/emi/**'
+            // Jade is an optional UI integration and is not required for the mod's core gameplay.
+            exclude 'com/leon/saintsdragons/forge/integration/jade/**'
+            // This worldgen mixin targets a post-1.18.2 structure-state implementation.
+            exclude 'com/leon/saintsdragons/forge/mixin/ChunkGeneratorStructureStateMixin.java'
         }
     }
 
@@ -86,6 +90,9 @@ dependencies {
     forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
 
     compileOnly "com.eliotlash.mclib:mclib:20"
+    // Standalone math types used by legacy shared rendering/collision helpers.
+    compileOnly "org.joml:joml:1.10.2"
+    forgeRuntimeLibrary("org.joml:joml:1.10.2")
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 
     // Compile-only bridge for Fabric @Environment metadata that can appear on shared/common deps.
@@ -95,9 +102,6 @@ dependencies {
     // GeckoLib Forge
     modImplementation "software.bernie.geckolib:geckolib-forge-1.18:${rootProject.geckolib_version}"
     forgeRuntimeLibrary("com.eliotlash.mclib:mclib:20")
-
-    // Jade integration (optional)
-    modCompileOnly "maven.modrinth:nvQzSEkH:UEoiUewC"
 
     // Optional JEI integration: API-only for production, full mod in local development.
     modCompileOnly "mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}"
