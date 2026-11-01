@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.world;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
 import com.leon.saintsdragons.common.registry.ModEntities;
 import com.leon.saintsdragons.common.registry.ModTags;
@@ -9,7 +11,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
@@ -105,7 +106,7 @@ public final class RaevyxStormSpawner {
         return players.get(level.random.nextInt(players.size()));
     }
 
-    private static BlockPos findSpawnPos(ServerLevel level, BlockPos center, RandomSource random) {
+    private static BlockPos findSpawnPos(ServerLevel level, BlockPos center, Random random) {
         for (int attempt = 0; attempt < SEARCH_ATTEMPTS; attempt++) {
             int x = center.getX() + random.nextInt(HORIZONTAL_RADIUS * 2 + 1) - HORIZONTAL_RADIUS;
             int z = center.getZ() + random.nextInt(HORIZONTAL_RADIUS * 2 + 1) - HORIZONTAL_RADIUS;
@@ -129,7 +130,7 @@ public final class RaevyxStormSpawner {
         return null;
     }
 
-    private static boolean spawnPack(ServerLevel level, BlockPos origin, RandomSource random) {
+    private static boolean spawnPack(ServerLevel level, BlockPos origin, Random random) {
         int minGroupSize = SaintsDragonsConfig.RAEVYX_MIN_GROUP_SIZE.get();
         int maxGroupSize = SaintsDragonsConfig.RAEVYX_MAX_GROUP_SIZE.get();
         if (minGroupSize <= 0 || maxGroupSize <= 0) {
@@ -175,7 +176,7 @@ public final class RaevyxStormSpawner {
         return level.addFreshEntity(raevyx);
     }
 
-    private static BlockPos findNearbyPackPos(ServerLevel level, BlockPos origin, RandomSource random) {
+    private static BlockPos findNearbyPackPos(ServerLevel level, BlockPos origin, Random random) {
         for (int attempt = 0; attempt < 10; attempt++) {
             int x = origin.getX() + random.nextInt(17) - 8;
             int z = origin.getZ() + random.nextInt(17) - 8;

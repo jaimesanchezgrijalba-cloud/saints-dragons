@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.raevyx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.server.entity.effect.LightningVisualEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -17,7 +19,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
@@ -249,7 +250,7 @@ public class RaevyxGroundRendTrailRenderer extends EntityRenderer<LightningVisua
 
         float[] offsetsA = new float[8];
         float[] offsetsB = new float[8];
-        RandomSource random = RandomSource.create(seed);
+        Random random = new Random(seed);
         float runningA = 0.0F;
         float runningB = 0.0F;
 

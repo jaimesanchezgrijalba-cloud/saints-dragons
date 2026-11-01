@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.cindervane;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.client.renderer.ShaderPassCompatibility;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +16,6 @@ import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -61,7 +62,7 @@ public class CindervaneFireballRenderer extends GeoEntityRenderer<CindervaneFire
             float time = age + i * 2.75F;
             int cycle = (int) (time / 16.0F);
             float progress = (time % 16.0F) / 16.0F;
-            var random = RandomSource.create(
+            var random = new Random(
                     entity.getUUID().getLeastSignificantBits() ^ (i * 73428767L) ^ (cycle * 912931L));
             double angle = random.nextDouble() * Math.PI * 2.0;
             double height = random.nextDouble() * 2.0 - 1.0;
