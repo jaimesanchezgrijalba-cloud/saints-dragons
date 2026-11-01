@@ -18,6 +18,8 @@ sourceSets {
             exclude 'com/leon/saintsdragons/forge/world/AddConditionalFeaturesBiomeModifier.java'
             exclude 'com/leon/saintsdragons/forge/world/AddDragonsBiomeModifier.java'
             exclude 'com/leon/saintsdragons/common/world/ConfiguredStructureSets.java'
+            // Datagen output is committed in common/src/generated/resources; these 1.20 datagen helpers are not runtime code.
+            exclude 'com/leon/saintsdragons/forge/data/**'
         }
     }
 

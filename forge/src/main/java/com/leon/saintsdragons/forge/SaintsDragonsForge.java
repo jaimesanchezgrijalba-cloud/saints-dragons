@@ -14,11 +14,6 @@ import com.leon.saintsdragons.common.init.CommonModEvents;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModPotions;
 import com.leon.saintsdragons.forge.client.ForgeConfigRootScreen;
-import com.leon.saintsdragons.forge.data.SaintsDragonBiomeTagsProvider;
-import com.leon.saintsdragons.forge.data.SaintsDragonBlockTagsProvider;
-import com.leon.saintsdragons.forge.data.SaintsDragonEntityTypeTagsProvider;
-import com.leon.saintsdragons.forge.data.SaintsDragonItemTagsProvider;
-import com.leon.saintsdragons.forge.data.SaintsDragonLootTableProvider;
 import com.leon.saintsdragons.forge.init.ForgeBrewingRecipes;
 import com.leon.saintsdragons.forge.loot.ModLootModifiers;
 import com.leon.saintsdragons.forge.world.ForgeBiomeLoadingHandler;
@@ -47,7 +42,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -86,7 +80,6 @@ public final class SaintsDragonsForge {
         modEventBus.addListener(this::onEntityAttributeModification);
         modEventBus.addListener(this::onRegisterSpawnPlacements);
         modEventBus.addListener(this::onCommonSetup);
-        modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(this::onModConfigEvent);
         MinecraftForge.EVENT_BUS.addListener(ForgeBiomeLoadingHandler::onBiomeLoading);
         MinecraftForge.EVENT_BUS.addListener(this::onRegisterCommands);
@@ -151,24 +144,6 @@ public final class SaintsDragonsForge {
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(ForgeBrewingRecipes::register);
-    }
-
-    private void onGatherData(GatherDataEvent event) {
-        var generator = event.getGenerator();
-        var output = generator.getPackOutput();
-        var lookupProvider = event.getLookupProvider();
-        var existingFileHelper = event.getExistingFileHelper();
-
-        var blockTags = new SaintsDragonBlockTagsProvider(output, lookupProvider, existingFileHelper);
-        generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(),
-                new SaintsDragonItemTagsProvider(output, lookupProvider, blockTags.contentsGetter(), existingFileHelper));
-        generator.addProvider(event.includeServer(),
-                new SaintsDragonEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(),
-                new SaintsDragonBiomeTagsProvider(output, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(),
-                SaintsDragonLootTableProvider.create(output));
     }
 
     private void onAddReloadListeners(AddReloadListenerEvent event) {
