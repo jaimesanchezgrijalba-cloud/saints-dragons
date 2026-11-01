@@ -8,7 +8,7 @@ import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import net.minecraft.core.Holder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.LevelAccessor;
@@ -291,7 +291,7 @@ public final class SaintsDragonVariantRegistry {
         }
         if (restrictions.hasBiomesByTagList()) {
             for (ResourceLocation tagId : restrictions.biomesByTag()) {
-                if (biome.is(TagKey.create(Registries.BIOME, tagId))) {
+                if (biome.is(TagKey.create(Registry.BIOME_REGISTRY, tagId))) {
                     return true;
                 }
             }
