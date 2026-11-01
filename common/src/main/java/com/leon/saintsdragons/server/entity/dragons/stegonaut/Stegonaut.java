@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.stegonaut;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.StegonautStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 
@@ -47,7 +49,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.server.level.ServerLevel;
@@ -510,7 +511,7 @@ public class Stegonaut extends RideableGroundDragon implements PackMember<Stegon
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         boolean hasSpawnSpace = SaintsDragonsConfig.isStegonautCustomSpawningEnabled()
                 ? DragonSpawnRules.hasCaveGroundSpawnSpace(level, pos)
                 : DragonSpawnRules.hasDryGroundSpawnSpace(level, pos);

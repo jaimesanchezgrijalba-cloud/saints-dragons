@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.ignivorus;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.IgnivorusStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.tactical.DragonWaterCombatProfile;
@@ -73,7 +75,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -1313,7 +1314,7 @@ public class Ignivorus extends RideableFlyingDragon implements ShakesScreen, Dra
     }
 
     private void spawnLeapImpactDirtParticles(ServerLevel level) {
-        RandomSource random = getRandom();
+        Random random = getRandom();
         Vec3 dragonPos = position();
         BlockParticleOption dirtParticles = new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState());
         spawnLeapParticleRing(level, dragonPos, dirtParticles, 5, 10, 40, random);
@@ -1323,7 +1324,7 @@ public class Ignivorus extends RideableFlyingDragon implements ShakesScreen, Dra
 
     private void spawnLeapParticleRing(ServerLevel level, Vec3 center,
                                        BlockParticleOption particleType,
-                                       int minRadius, int maxRadius, int count, RandomSource random) {
+                                       int minRadius, int maxRadius, int count, Random random) {
         for (int i = 0; i < count; i++) {
             double angle = random.nextDouble() * Math.PI * 2;
             double radius = minRadius + random.nextDouble() * (maxRadius - minRadius);
@@ -3421,7 +3422,7 @@ public class Ignivorus extends RideableFlyingDragon implements ShakesScreen, Dra
                                        LevelAccessor level,
                                        MobSpawnType reason,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         if (!Animal.checkAnimalSpawnRules(type, level, reason, pos, random)) {
             return false;
         }

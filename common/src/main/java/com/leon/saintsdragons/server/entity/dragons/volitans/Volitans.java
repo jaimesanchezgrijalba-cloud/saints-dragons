@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.volitans;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.server.entity.component.DragonBreathPose;
 
 import com.leon.saintsdragons.common.config.dragon.profile.VolitansStatProfile;
@@ -81,7 +83,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -475,7 +476,7 @@ public class Volitans extends RideableFlyingDragon implements DragonCombatLearne
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         if (!TamableAnimal.checkMobSpawnRules(type, level, spawnType, pos, random)) {
             return false;
         }

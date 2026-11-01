@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.cindervane;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.CindervaneStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.tactical.DragonWaterCombatProfile;
@@ -84,7 +86,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -469,7 +470,7 @@ public class Cindervane extends RideableFlyingDragon implements ShakesScreen, Pa
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         return !level.getBiome(pos).is(Biomes.SNOWY_SLOPES)
                 && DragonSpawnRules.hasEstablishedCreaturePool(level, spawnType, pos)
                 && DragonSpawnRules.hasDryGroundSpawnSpace(level, pos)
@@ -635,7 +636,7 @@ public class Cindervane extends RideableFlyingDragon implements ShakesScreen, Pa
     }
 
     private String selectAmbientGrumble() {
-        RandomSource random = getRandom();
+        Random random = getRandom();
         float roll = random.nextFloat();
 
         if (roll < 0.45f) {

@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.varasuchus;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.VarasuchusStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 
@@ -47,7 +49,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -1153,7 +1154,7 @@ public class Varasuchus extends RideableGroundDragon implements SemiAquaticDrago
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         boolean mobRules = Mob.checkMobSpawnRules(type, level, spawnType, pos, random);
         return mobRules
                 && DragonSpawnRules.hasDryGroundSpawnSpace(level, pos)
