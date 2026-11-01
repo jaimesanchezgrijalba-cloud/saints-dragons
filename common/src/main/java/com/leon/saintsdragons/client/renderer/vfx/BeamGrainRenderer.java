@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -8,7 +10,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -45,7 +46,7 @@ public final class BeamGrainRenderer {
 
         for (int slot = 0; slot < style.count(); slot++) {
             long slotSeed = seed ^ SLOT_SEED * (slot + 1L);
-            RandomSource slotRandom = RandomSource.create(slotSeed);
+            Random slotRandom = new Random(slotSeed);
             float lifetime = Math.max(1.0F, Mth.lerp(slotRandom.nextFloat(),
                     style.minimumLifetimeTicks(), style.maximumLifetimeTicks()));
             float cycleTime = Math.max(0.0F, ageInTicks)
@@ -53,7 +54,7 @@ public final class BeamGrainRenderer {
             long cycle = Mth.floor(cycleTime / lifetime);
             float life = Mth.frac(cycleTime / lifetime);
 
-            RandomSource cycleRandom = RandomSource.create(slotSeed ^ CYCLE_SEED * (cycle + 1L));
+            Random cycleRandom = new Random(slotSeed ^ CYCLE_SEED * (cycle + 1L));
             double angle = cycleRandom.nextDouble() * Mth.TWO_PI;
             float radius = Mth.sqrt(cycleRandom.nextFloat()) * style.maximumOffset() * visibility;
             float offsetX = Mth.cos((float)angle) * radius;
@@ -163,7 +164,7 @@ public final class BeamGrainRenderer {
             }
 
             long emissionSeed = seed ^ CYCLE_SEED * (emission + 1L);
-            RandomSource particleRandom = RandomSource.create(emissionSeed);
+            Random particleRandom = new Random(emissionSeed);
             float birthTime = emission * emissionInterval
                     + particleRandom.nextFloat() * emissionInterval;
             float particleAge = now - birthTime;

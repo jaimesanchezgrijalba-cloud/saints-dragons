@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.renderer.ShaderPassCompatibility;
 import com.leon.saintsdragons.server.entity.ability.abilities.raevyx.RaevyxGroundRendAbility;
 import com.leon.saintsdragons.server.entity.dragons.raevyx.Raevyx;
@@ -7,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -51,7 +52,7 @@ public final class RaevyxGroundRendLightningRenderer {
             Vec3 ground = hit.getType() == HitResult.Type.BLOCK && hit.getDirection().getStepY() > 0
                     ? hit.getLocation().add(0, 0.035D, 0) : null;
             long seed = dragon.getUUID().getLeastSignificantBits() ^ castStart ^ (cycle * 73428767L);
-            RandomSource random = RandomSource.create(seed);
+            Random random = new Random(seed);
             double angle = random.nextDouble() * Math.PI * 2;
             double offset = 4.0D + random.nextDouble() * 3.0D;
             Vec3 overhead = new Vec3(center.x, bounds.maxY + 8.0D, center.z);
@@ -60,7 +61,7 @@ public final class RaevyxGroundRendLightningRenderer {
             Vec3 secondFrom = overhead.add(Math.cos(secondAngle) * offset, -1.5D, Math.sin(secondAngle) * offset);
             strike = new Strike(castStart, cycle, from, secondFrom, ground, seed);
             STRIKES.put(dragon, strike);
-            if (ground != null) RaevyxStormLightningRenderer.impact(dragon, ground, RandomSource.create(seed), true);
+            if (ground != null) RaevyxStormLightningRenderer.impact(dragon, ground, new Random(seed), true);
         }
         if (strike == null || strike.castStart != castStart || strike.ground == null) return;
         // Hold each impact in world space while the next strike follows the moving hitbox.

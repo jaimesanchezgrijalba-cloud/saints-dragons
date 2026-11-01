@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.LightTexture;
@@ -8,7 +10,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
@@ -45,7 +46,7 @@ public final class AttachedWindRenderer {
                     nextSpawnTime = time;
                 }
                 while (nextSpawnTime <= time) {
-                    RandomSource random = RandomSource.create(seed ^ PULSE_SEED * ++sequence);
+                    Random random = new Random(seed ^ PULSE_SEED * ++sequence);
                     for (int texture = 0; texture < textureCount; texture++) {
                         pulses.add(new Pulse(nextSpawnTime, texture,
                                 random.nextFloat() * Mth.TWO_PI,

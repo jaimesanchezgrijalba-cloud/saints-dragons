@@ -1,7 +1,8 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
@@ -102,7 +103,7 @@ public final class DragonBoneSurfaceSampler {
         return List.copyOf(faces);
     }
 
-    static Vec3 sample(List<WeightedFace> faces, double area, RandomSource random) {
+    static Vec3 sample(List<WeightedFace> faces, double area, Random random) {
         int low = 0, high = faces.size() - 1;
         while (low < high) {
             int middle = (low + high) >>> 1;
