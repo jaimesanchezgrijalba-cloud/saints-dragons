@@ -35,7 +35,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
+import java.util.Random;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -995,7 +995,7 @@ public abstract class RideableFlyingDragon extends RideableDragonBase implements
             return;
         }
 
-        RandomSource random = getRandom();
+        Random random = getRandom();
         double radius = Math.max(getBbWidth() * radiusScale, 1.35D);
         double y = getBoundingBox().minY + 0.08D;
         for (int i = 0; i < count; i++) {
@@ -1130,7 +1130,7 @@ public abstract class RideableFlyingDragon extends RideableDragonBase implements
             return;
         }
 
-        RandomSource random = getRandom();
+        Random random = getRandom();
         Vec3 velocity = getDeltaMovement();
         Vec3 horizontal = new Vec3(velocity.x, 0.0D, velocity.z);
         double positionDeltaX = getX() - xo;
@@ -1158,7 +1158,7 @@ public abstract class RideableFlyingDragon extends RideableDragonBase implements
             return;
         }
 
-        RandomSource random = getRandom();
+        Random random = getRandom();
         Vec3 velocity = getDeltaMovement();
         Vec3 horizontal = new Vec3(velocity.x, 0.0D, velocity.z);
         double positionDeltaX = getX() - xo;
