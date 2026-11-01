@@ -21,11 +21,10 @@ import com.leon.saintsdragons.forge.data.SaintsDragonItemTagsProvider;
 import com.leon.saintsdragons.forge.data.SaintsDragonLootTableProvider;
 import com.leon.saintsdragons.forge.init.ForgeBrewingRecipes;
 import com.leon.saintsdragons.forge.loot.ModLootModifiers;
+import com.leon.saintsdragons.forge.world.ForgeBiomeLoadingHandler;
 import com.leon.saintsdragons.forge.mixin.RangedAttributeAccessor;
 import com.leon.saintsdragons.forge.platform.ForgeClientConfig;
 import com.leon.saintsdragons.forge.platform.ForgeDragonAttributesConfig;
-import com.leon.saintsdragons.forge.world.AddConditionalFeaturesBiomeModifier;
-import com.leon.saintsdragons.forge.world.AddDragonsBiomeModifier;
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import com.leon.saintsdragons.server.entity.dragons.cindervane.Cindervane;
 import com.leon.saintsdragons.server.entity.dragons.ignivorus.Ignivorus;
@@ -34,7 +33,6 @@ import com.leon.saintsdragons.server.entity.dragons.raevyx.Raevyx;
 import com.leon.saintsdragons.server.entity.dragons.stegonaut.Stegonaut;
 import com.leon.saintsdragons.server.entity.dragons.varasuchus.Varasuchus;
 import com.leon.saintsdragons.server.entity.dragons.volitans.Volitans;
-import com.mojang.serialization.Codec;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -49,7 +47,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -63,9 +60,6 @@ import net.minecraftforge.fml.event.config.ModConfigEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
@@ -78,20 +72,10 @@ public final class SaintsDragonsForge {
     private static final double ATTRIBUTE_CAP = 100000.0D;
     private static final String FORGE_ATTRIBUTES_CONFIG_FILE = SaintsDragonsConfig.DRAGON_ATTRIBUTES_CONFIG_FILE;
     private static final String FORGE_CLIENT_CONFIG_FILE = SaintsDragonsConfig.CLIENT_COMMON_CONFIG_FILE;
-    private static final DeferredRegister<Codec<? extends BiomeModifier>> BIOME_MODIFIERS =
-            DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, SaintsDragonsCommon.MOD_ID);
-
-    public static final RegistryObject<Codec<AddConditionalFeaturesBiomeModifier>> ADD_CONDITIONAL_FEATURES =
-            BIOME_MODIFIERS.register("add_conditional_features", () -> AddConditionalFeaturesBiomeModifier.CODEC);
-
-    public static final RegistryObject<Codec<AddDragonsBiomeModifier>> ADD_DRAGONS =
-            BIOME_MODIFIERS.register("add_dragons", () -> AddDragonsBiomeModifier.CODEC);
-
     public SaintsDragonsForge() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ConfigStorageLayout.migrateLegacyFiles();
         raiseVanillaMaxHealthCap();
-        BIOME_MODIFIERS.register(modEventBus);
         ModLootModifiers.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON,
                 ForgeDragonAttributesConfig.ATTRIBUTES_SPEC,
@@ -104,6 +88,7 @@ public final class SaintsDragonsForge {
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::onGatherData);
         modEventBus.addListener(this::onModConfigEvent);
+        MinecraftForge.EVENT_BUS.addListener(ForgeBiomeLoadingHandler::onBiomeLoading);
         MinecraftForge.EVENT_BUS.addListener(this::onRegisterCommands);
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
 

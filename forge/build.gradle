@@ -15,6 +15,9 @@ sourceSets {
             exclude 'com/leon/saintsdragons/forge/integration/jade/**'
             // This worldgen mixin targets a post-1.18.2 structure-state implementation.
             exclude 'com/leon/saintsdragons/forge/mixin/ChunkGeneratorStructureStateMixin.java'
+            exclude 'com/leon/saintsdragons/forge/world/AddConditionalFeaturesBiomeModifier.java'
+            exclude 'com/leon/saintsdragons/forge/world/AddDragonsBiomeModifier.java'
+            exclude 'com/leon/saintsdragons/common/world/ConfiguredStructureSets.java'
         }
     }
 
