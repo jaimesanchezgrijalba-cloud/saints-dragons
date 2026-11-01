@@ -1,8 +1,8 @@
 // I know that we are upside down, so hold your tongue and hear me out
 
-import net.minecraft.core.Registry;
-
 package com.leon.saintsdragons.server.entity.npc;
+
+import net.minecraft.core.Registry;
 
 import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
