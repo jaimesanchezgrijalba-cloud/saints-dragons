@@ -3,7 +3,7 @@ package com.leon.saintsdragons.common.codex;
 import com.leon.saintsdragons.common.registry.ModTags;
 import com.leon.saintsdragons.common.registry.ModSounds;
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -111,7 +111,7 @@ public final class DragonCodexRegistry {
     }
 
     public static String speciesKey(DragonEntity dragon) {
-        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(dragon.getType());
+        ResourceLocation id = Registry.ENTITY_TYPE.getKey(dragon.getType());
         return id.getNamespace().equals("saintsdragons") ? id.getPath() : id.toString();
     }
 

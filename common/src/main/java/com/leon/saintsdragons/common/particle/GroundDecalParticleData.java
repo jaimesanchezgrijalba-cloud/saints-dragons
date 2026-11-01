@@ -7,7 +7,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import org.jetbrains.annotations.NotNull;
 
@@ -78,7 +78,7 @@ public record GroundDecalParticleData(boolean fissure, float yaw, float scale, i
         return String.format(
                 Locale.ROOT,
                 "%s %s %.2f %.2f %d",
-                BuiltInRegistries.PARTICLE_TYPE.getKey(getType()),
+                Registry.PARTICLE_TYPE.getKey(getType()),
                 this.fissure,
                 this.yaw,
                 this.scale,

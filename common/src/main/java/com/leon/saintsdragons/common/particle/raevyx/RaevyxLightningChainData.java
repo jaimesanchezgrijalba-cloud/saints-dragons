@@ -7,7 +7,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +73,7 @@ public record RaevyxLightningChainData(float size, Vec3 startPos, Vec3 endPos) i
     @Override
     public @NotNull String writeToString() {
         return String.format(Locale.ROOT, "%s %.2f %.2f %.2f %.2f %.2f %.2f %.2f",
-                BuiltInRegistries.PARTICLE_TYPE.getKey(ModParticles.LIGHTNING_CHAIN.get()), this.size,
+                Registry.PARTICLE_TYPE.getKey(ModParticles.LIGHTNING_CHAIN.get()), this.size,
                 this.startPos.x, this.startPos.y, this.startPos.z,
                 this.endPos.x, this.endPos.y, this.endPos.z);
     }

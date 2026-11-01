@@ -7,7 +7,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +53,7 @@ public record RaevyxLightningStormData(float size, boolean nightGold) implements
         return String.format(
                 Locale.ROOT,
                 "%s %.2f",
-                BuiltInRegistries.PARTICLE_TYPE.getKey(getType()),
+                Registry.PARTICLE_TYPE.getKey(getType()),
                 this.size
         );
     }
