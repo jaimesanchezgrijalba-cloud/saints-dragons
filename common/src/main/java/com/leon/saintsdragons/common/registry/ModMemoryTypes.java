@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
@@ -10,8 +12,6 @@ import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonTargetTrack
 import com.leon.saintsdragons.server.ai.dragonbrain.tactical.DragonTacticalCommitment;
 import com.leon.saintsdragons.server.entity.base.DragonLocomotionMode;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
@@ -24,8 +24,7 @@ import java.util.function.Supplier;
 public final class ModMemoryTypes {
     private static final RegistryHelper.RegistryWrapper<MemoryModuleType<?>> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.MEMORY_MODULE_TYPE, () -> BuiltInRegistries.MEMORY_MODULE_TYPE,
-                            SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.MEMORY_MODULE_TYPES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<MemoryModuleType<Boolean>> TARGET_AIRBORNE = register("target_airborne");
     public static final Supplier<MemoryModuleType<Boolean>> IS_AERIAL = register("is_aerial");

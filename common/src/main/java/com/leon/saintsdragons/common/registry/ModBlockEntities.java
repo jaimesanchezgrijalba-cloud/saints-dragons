@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.block.RaevyxEggBlockEntity;
 import com.leon.saintsdragons.common.block.IgnivorusEggBlockEntity;
@@ -12,8 +14,6 @@ import com.leon.saintsdragons.common.block.DraconianNucleusBlockEntity;
 import com.leon.saintsdragons.common.block.DraconicCrucibleBlockEntity;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import java.util.function.Supplier;
@@ -21,7 +21,7 @@ import java.util.function.Supplier;
 public final class ModBlockEntities {
     private static final RegistryHelper.RegistryWrapper<BlockEntityType<?>> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.BLOCK_ENTITY_TYPE, () -> BuiltInRegistries.BLOCK_ENTITY_TYPE, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<BlockEntityType<RaevyxEggBlockEntity>> RAEVYX_EGG =
             REGISTER.register("raevyx_egg", () -> BlockEntityType.Builder.of(

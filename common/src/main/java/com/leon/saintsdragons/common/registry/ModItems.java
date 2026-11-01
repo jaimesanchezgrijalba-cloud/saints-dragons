@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.item.*;
 import com.leon.saintsdragons.common.item.dragonfood.HeartyDragonMealItem;
 import com.leon.saintsdragons.common.item.tools.DragonheartWeaponTier;
@@ -9,8 +11,6 @@ import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
 import com.leon.saintsdragons.server.entity.dragons.Mossback;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final RegistryHelper.RegistryWrapper<Item> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.ITEM, () -> BuiltInRegistries.ITEM, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.ITEMS, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<Item> RAEVYX_SPAWN_EGG =
             REGISTER.register("raevyx_spawn_egg",

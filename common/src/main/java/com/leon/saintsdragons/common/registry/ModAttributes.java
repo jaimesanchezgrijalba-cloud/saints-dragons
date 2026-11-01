@@ -1,10 +1,10 @@
 package com.leon.saintsdragons.common.registry;
 
+import net.minecraftforge.registries.ForgeRegistries;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.platform.RegistryHelper;
 import com.leon.saintsdragons.platform.Services;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public final class ModAttributes {
     public static final RegistryHelper.RegistryWrapper<Attribute> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.ATTRIBUTE, () -> BuiltInRegistries.ATTRIBUTE, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.ATTRIBUTES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<Attribute> DOUBLE_JUMP =
             REGISTER.register("double_jump",
