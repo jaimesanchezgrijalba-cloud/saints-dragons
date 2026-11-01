@@ -1,7 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import org.jetbrains.annotations.Nullable;
@@ -48,7 +48,7 @@ public final class DragonSpeciesRegistry {
     }
 
     public static ResourceLocation speciesId(DragonEntity dragon) {
-        return BuiltInRegistries.ENTITY_TYPE.getKey(dragon.getType());
+        return Registry.ENTITY_TYPE.getKey(dragon.getType());
     }
 
     public record Definition(ResourceLocation id, ResourceLocation attributesId,
