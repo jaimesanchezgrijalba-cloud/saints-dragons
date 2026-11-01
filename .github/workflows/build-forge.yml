@@ -16,14 +16,24 @@ jobs:
   build-forge:
     runs-on: ubuntu-latest
     env:
-      # Make the Java 17 installation available to Gradle's toolchain detector.
       ORG_GRADLE_JAVA_INSTALLATIONS_FROM_ENV: JAVA_HOME_17_X64
     steps:
       - name: Check out source
         uses: actions/checkout@v4
 
-      # Gradle/Loom's plugin dependency graph needs Java 21 to run.
-      # The project requests Java 17 for compilation; keep that as a separate toolchain.
+      - name: Archive source tree for porting analysis
+        run: |
+          zip -qr /tmp/saints-dragons-source.zip . \
+            -x '.git/*' '*/.git/*' '*/build/*' '*/.gradle/*'
+      
+      - name: Upload source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: saints-dragons-source-snapshot
+          path: /tmp/saints-dragons-source.zip
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Set up Java 21 runtime and Java 17 toolchain
         uses: actions/setup-java@v4
         with:
@@ -44,7 +54,6 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # Baseline compile first: this checks the untouched 1.20.1 source and CI toolchain.
       - name: Compile Forge project
         run: |
           JAVA_HOME="$JAVA_HOME_21_X64" PATH="$JAVA_HOME_21_X64/bin:$PATH" \
