@@ -1,7 +1,8 @@
 package com.leon.saintsdragons.common.config.dragon;
 
+import java.util.Random;
+
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 
 public final class DragonTamingChance {
     private DragonTamingChance() {
@@ -15,7 +16,7 @@ public final class DragonTamingChance {
         return clampPercent(configuredValue) / 100.0D;
     }
 
-    public static boolean rollPercent(RandomSource random, double configuredValue) {
+    public static boolean rollPercent(Random random, double configuredValue) {
         return random.nextDouble() < probabilityFromPercent(configuredValue);
     }
 }

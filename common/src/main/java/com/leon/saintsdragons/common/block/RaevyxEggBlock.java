@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.block;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
@@ -15,7 +17,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.LightningBolt;
@@ -132,7 +133,7 @@ public class RaevyxEggBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
+    public void tick(@NotNull BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull Random random) {
         level.getEntitiesOfClass(LightningBolt.class,
             new AABB(pos).inflate(3.0D))
             .stream()

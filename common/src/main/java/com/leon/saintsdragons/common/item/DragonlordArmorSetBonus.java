@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.common.item;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModEntities;
@@ -18,7 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -378,7 +379,7 @@ public final class DragonlordArmorSetBonus {
                     1, 0.0D, 0.0D, 0.0D, 0.0D);
         }
 
-        RandomSource random = player.getRandom();
+        Random random = player.getRandom();
         double y = player.getBoundingBox().minY + 0.08D;
         for (int i = 0; i < LANDING_IMPACT_DUST_COUNT; i++) {
             double angle = (Math.PI * 2.0D * i) / LANDING_IMPACT_DUST_COUNT
@@ -402,7 +403,7 @@ public final class DragonlordArmorSetBonus {
                 SoundSource.PLAYERS, 1.35F, 0.88F + random.nextFloat() * 0.08F);
     }
 
-    private static void spawnLandingDebris(ServerLevel server, Vec3 origin, RandomSource random,
+    private static void spawnLandingDebris(ServerLevel server, Vec3 origin, Random random,
                                            double effectRadius) {
         for (int i = 0; i < LANDING_DEBRIS_COUNT; i++) {
             double angle = (Math.PI * 2.0D * i) / LANDING_DEBRIS_COUNT

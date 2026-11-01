@@ -1,11 +1,12 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.atroxiia;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.server.entity.dragons.atroxiia.Atroxiia;
 import com.leon.saintsdragons.server.entity.dragons.cindervane.Cindervane;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -54,7 +55,7 @@ final class AtroxiiaFrostImpact {
             return;
         }
 
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         double surfaceRadius = Math.max(0.25D, target.getBbWidth() * 0.3D);
         for (int i = 0; i < SNOW_BURST_PARTICLES; i++) {
             double angle = random.nextDouble() * Math.PI * 2.0D;
