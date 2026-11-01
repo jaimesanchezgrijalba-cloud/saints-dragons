@@ -52,7 +52,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
@@ -101,7 +100,6 @@ public final class SaintsDragonsForge {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> ClientOnly::registerConfigScreen);
         modEventBus.addListener(this::onEntityAttributeCreation);
         modEventBus.addListener(this::onEntityAttributeModification);
-        modEventBus.addListener(this::onBuildCreativeTabs);
         modEventBus.addListener(this::onRegisterSpawnPlacements);
         modEventBus.addListener(this::onCommonSetup);
         modEventBus.addListener(this::onGatherData);
@@ -146,37 +144,6 @@ public final class SaintsDragonsForge {
         event.add(EntityType.PLAYER, ModAttributes.DOUBLE_JUMP.get());
         event.add(EntityType.PLAYER, ModAttributes.FIRE_RESISTANCE.get());
         event.add(EntityType.PLAYER, ModAttributes.BLAST_RESISTANCE.get());
-    }
-
-    private void onBuildCreativeTabs(BuildCreativeModeTabContentsEvent event) {
-        CommonModEvents.registerCreativeTabEntries((tabKey, itemSupplier) -> {
-            if (event.getTabKey().equals(tabKey)) {
-                event.accept(itemSupplier::get);
-            }
-        });
-
-        List<ItemStack> toRemove = new ArrayList<>();
-        for (Map.Entry<ItemStack, ?> entry : event.getEntries()) {
-            if (isHiddenVanillaPotionVariant(entry.getKey())) {
-                toRemove.add(entry.getKey());
-            }
-        }
-        for (ItemStack stack : toRemove) {
-            event.getEntries().remove(stack);
-        }
-    }
-
-    private static boolean isHiddenVanillaPotionVariant(ItemStack stack) {
-        if (stack == null || stack.isEmpty()) {
-            return false;
-        }
-
-        if (!stack.is(Items.POTION) && !stack.is(Items.SPLASH_POTION) && !stack.is(Items.LINGERING_POTION)) {
-            return false;
-        }
-
-        Potion potion = PotionUtils.getPotion(stack);
-        return potion == ModPotions.TIDEGUARD.get() || potion == ModPotions.SEARING.get();
     }
 
     private void onRegisterSpawnPlacements(SpawnPlacementRegisterEvent event) {

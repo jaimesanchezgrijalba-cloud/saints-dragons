@@ -1,131 +1,127 @@
 package com.leon.saintsdragons.common.registry;
 
-import com.leon.saintsdragons.common.SaintsDragonsCommon;
-import com.leon.saintsdragons.platform.RegistryHelper;
-import com.leon.saintsdragons.platform.Services;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.function.Supplier;
+public final class SaintsCreativeTab {
+    /**
+     * Minecraft 1.18.2 creates creative tabs directly; they are not registry entries.
+     * Weapon-specific entries have intentionally been left out of this port.
+     */
+    public static final CreativeModeTab SD_CREATIVE_TAB = new CreativeModeTab("saintsdragons") {
+        @Override
+        public ItemStack makeIcon() {
+            return new ItemStack(ModItems.RAEVYX_BINDER.get());
+        }
 
-public class SaintsCreativeTab {
-    public static final RegistryHelper.RegistryWrapper<CreativeModeTab> REGISTER = Services.PLATFORM.getRegistryHelper()
-            .create((Registries.CREATIVE_MODE_TAB), () -> BuiltInRegistries.CREATIVE_MODE_TAB, SaintsDragonsCommon.MOD_ID);
+        @Override
+        public void fillItemList(NonNullList<ItemStack> items) {
+            super.fillItemList(items);
+            items.add(new ItemStack(ModItems.RAEVYX_BINDER.get()));
+            items.add(new ItemStack(ModItems.CINDERVANE_BINDER.get()));
+            items.add(new ItemStack(ModItems.STEGONAUT_BINDER.get()));
+            items.add(new ItemStack(ModItems.VARASUCHUS_BINDER.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_BINDER.get()));
+            items.add(new ItemStack(ModItems.VOLITANS_BINDER.get()));
+            items.add(new ItemStack(ModItems.NULLJAW_BINDER.get()));
+            items.add(new ItemStack(ModItems.ATROXIIA_BINDER.get()));
+            items.add(new ItemStack(ModItems.DRACONIAN_CONTROLLER.get()));
+            items.add(new ItemStack(ModItems.DRACONIC_CODEX.get()));
+            items.add(new ItemStack(ModItems.DRAGON_BRUSH.get()));
+            items.add(new ItemStack(ModItems.GOLDEN_DRAGON_BRUSH.get()));
+            items.add(new ItemStack(ModItems.SCALE_PLUCKER.get()));
+            items.add(new ItemStack(ModItems.HEARTY_DRAGON_MEAL.get()));
+            items.add(new ItemStack(ModItems.CREATIVE_DRAGON_TAME_MEAL.get()));
+            items.add(new ItemStack(ModItems.CREATIVE_DRAGON_GENDER_WAND.get()));
+            items.add(new ItemStack(ModItems.CREATIVE_DRAGON_VARIANT_BRUSH.get()));
+            items.add(new ItemStack(ModItems.RAW_MOOP.get()));
+            items.add(new ItemStack(ModItems.COOKED_MOOP.get()));
+            items.add(new ItemStack(ModItems.BUCKET_OF_MOOP.get()));
+            items.add(new ItemStack(ModItems.RAW_MOSSBACK.get()));
+            items.add(new ItemStack(ModItems.COOKED_MOSSBACK.get()));
+            items.add(new ItemStack(ModItems.RAEVYX_SCALE.get()));
+            items.add(new ItemStack(ModItems.RAEVYX_WING_HIDE.get()));
+            items.add(new ItemStack(ModItems.RAEVYX_WINGTALON.get()));
+            items.add(new ItemStack(ModItems.CINDERVANE_SCALE.get()));
+            items.add(new ItemStack(ModItems.STEGONAUT_SCALE.get()));
+            items.add(new ItemStack(ModItems.VARASUCHUS_SCALE.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_SCALE.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_TOOTH.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_WING_HIDE.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_HEART.get()));
+            items.add(new ItemStack(ModItems.VOLITANS_SCALE.get()));
+            items.add(new ItemStack(ModItems.VOLITANS_SPINE.get()));
+            items.add(new ItemStack(ModItems.ATROXIIA_SCALE.get()));
+            items.add(new ItemStack(ModItems.DRACONIAN_FLESH.get()));
+            items.add(new ItemStack(ModItems.RAEVYX_EGG.get()));
+            items.add(new ItemStack(ModItems.CINDERVANE_EGG.get()));
+            items.add(new ItemStack(ModItems.STEGONAUT_EGG.get()));
+            items.add(new ItemStack(ModItems.VARASUCHUS_EGG.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_EGG.get()));
+            items.add(new ItemStack(ModItems.VOLITANS_EGG.get()));
+            items.add(new ItemStack(ModItems.ATROXIIA_EGG.get()));
+            items.add(new ItemStack(ModItems.IVY_OCTOPUS_PLUSHIE.get()));
+            items.add(new ItemStack(ModItems.SEARING_COAL.get()));
+            items.add(new ItemStack(ModItems.ANCIENT_DRAGONITE_FRAGMENT.get()));
+            items.add(new ItemStack(ModItems.DRAGON_SEAL_STONE.get()));
+            items.add(new ItemStack(ModItems.DRAGON_BINDER_CORE.get()));
+            items.add(new ItemStack(ModItems.RAW_WORLDROOT.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_INGOT.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_PICKAXE.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_AXE.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_SHOVEL.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_HOE.get()));
+            items.add(new ItemStack(ModItems.DRAGONHEART_CHUNK.get()));
+            items.add(new ItemStack(ModItems.DRAGONHEART_ALLOY.get()));
+            items.add(new ItemStack(ModArmors.DRACONIAN_HELMET.get()));
+            items.add(new ItemStack(ModArmors.DRACONIAN_CHESTPLATE.get()));
+            items.add(new ItemStack(ModArmors.DRACONIAN_LEGGINGS.get()));
+            items.add(new ItemStack(ModArmors.DRACONIAN_BOOTS.get()));
+            items.add(new ItemStack(ModArmors.BLOOD_TEMPEST_HELMET.get()));
+            items.add(new ItemStack(ModArmors.BLOOD_TEMPEST_CHESTPLATE.get()));
+            items.add(new ItemStack(ModArmors.BLOOD_TEMPEST_LEGGINGS.get()));
+            items.add(new ItemStack(ModArmors.BLOOD_TEMPEST_BOOTS.get()));
+            items.add(new ItemStack(ModArmors.DRAGONLORD_HELMET.get()));
+            items.add(new ItemStack(ModArmors.DRAGONLORD_CHESTPLATE.get()));
+            items.add(new ItemStack(ModArmors.DRAGONLORD_LEGGINGS.get()));
+            items.add(new ItemStack(ModArmors.DRAGONLORD_BOOTS.get()));
+            items.add(new ItemStack(ModPotionItems.POTION_OF_TIDEGUARD.get()));
+            items.add(new ItemStack(ModPotionItems.POTION_OF_SEARING.get()));
+            items.add(new ItemStack(ModItems.BLEEDING_BOLT_MUSIC_DISC.get()));
+            items.add(new ItemStack(ModItems.MOSSBACK_MUSIC_MUSIC_DISC.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_INCUBATOR_BLOCK.get()));
+            items.add(new ItemStack(ModItems.DRAGONHEART_ORE.get()));
+            items.add(new ItemStack(ModItems.DRAGONHEART_ALLOY_BLOCK.get()));
+            items.add(new ItemStack(ModItems.DRAGONHEART_BLOCK.get()));
+            items.add(new ItemStack(ModItems.DEEPSLATE_WORLDROOT_ORE.get()));
+            items.add(new ItemStack(ModItems.WORLDROOT_BLOCK.get()));
+            items.add(new ItemStack(ModItems.RAW_WORLDROOT_BLOCK.get()));
+            items.add(new ItemStack(ModItems.DRACONIAN_PELLUCIDA.get()));
+            items.add(new ItemStack(ModItems.DRACONIAN_NUCLEUS.get()));
+            items.add(new ItemStack(ModItems.DRACONIC_CRUCIBLE.get()));
+            items.add(new ItemStack(ModItems.RAEVYX_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.CINDERVANE_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.STEGONAUT_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.VARASUCHUS_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.IGNIVORUS_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.VOLITANS_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.NULLJAW_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.ATROXIIA_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.MOSSBACK_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.LATCHER_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.WINGED_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.WHETTLED_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.DRACONIAN_SWARM_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.MOOP_SPAWN_EGG.get()));
+            items.add(new ItemStack(ModItems.IVY_THE_MERCHANT_SPAWN_EGG.get()));
+        }
+    };
 
-    public static final Supplier<CreativeModeTab> SD_CREATIVE_TAB =
-            REGISTER.register("saintsdragons_tab",
-                    () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-                            .title(Component.translatable("itemGroup.saintsdragons"))
-                            .icon(() -> new ItemStack(ModItems.RAEVYX_BINDER.get()))
-                            .displayItems((itemDisplayParameters, output) -> {
-                                output.accept(ModItems.RAEVYX_BINDER.get());
-                                output.accept(ModItems.CINDERVANE_BINDER.get());
-                                output.accept(ModItems.STEGONAUT_BINDER.get());
-                                output.accept(ModItems.VARASUCHUS_BINDER.get());
-                                output.accept(ModItems.IGNIVORUS_BINDER.get());
-                                output.accept(ModItems.VOLITANS_BINDER.get());
-                                output.accept(ModItems.NULLJAW_BINDER.get());
-                                output.accept(ModItems.ATROXIIA_BINDER.get());
-                                output.accept(ModItems.DRACONIAN_CONTROLLER.get());
-                                output.accept(ModItems.DRACONIC_CODEX.get());
-                                output.accept(ModItems.DRAGON_BRUSH.get());
-                                output.accept(ModItems.GOLDEN_DRAGON_BRUSH.get());
-                                output.accept(ModItems.SCALE_PLUCKER.get());
-                                output.accept(ModItems.HEARTY_DRAGON_MEAL.get());
-                                output.accept(ModItems.CREATIVE_DRAGON_TAME_MEAL.get());
-                                output.accept(ModItems.CREATIVE_DRAGON_GENDER_WAND.get());
-                                output.accept(ModItems.CREATIVE_DRAGON_VARIANT_BRUSH.get());
-                                output.accept(ModItems.RAW_MOOP.get());
-                                output.accept(ModItems.COOKED_MOOP.get());
-                                output.accept(ModItems.BUCKET_OF_MOOP.get());
-                                output.accept(ModItems.RAW_MOSSBACK.get());
-                                output.accept(ModItems.COOKED_MOSSBACK.get());
-                                output.accept(ModItems.RAEVYX_SCALE.get());
-                                output.accept(ModItems.RAEVYX_WING_HIDE.get());
-                                output.accept(ModItems.RAEVYX_WINGTALON.get());
-                                output.accept(ModItems.CINDERVANE_SCALE.get());
-                                output.accept(ModItems.STEGONAUT_SCALE.get());
-                                output.accept(ModItems.VARASUCHUS_SCALE.get());
-                                output.accept(ModItems.IGNIVORUS_SCALE.get());
-                                output.accept(ModItems.IGNIVORUS_TOOTH.get());
-                                output.accept(ModItems.IGNIVORUS_WING_HIDE.get());
-                                output.accept(ModItems.IGNIVORUS_HEART.get());
-                                output.accept(ModItems.VOLITANS_SCALE.get());
-                                output.accept(ModItems.VOLITANS_SPINE.get());
-                                output.accept(ModItems.ATROXIIA_SCALE.get());
-                                output.accept(ModItems.DRACONIAN_FLESH.get());
-                                output.accept(ModItems.RAEVYX_EGG.get());
-                                output.accept(ModItems.CINDERVANE_EGG.get());
-                                output.accept(ModItems.STEGONAUT_EGG.get());
-                                output.accept(ModItems.VARASUCHUS_EGG.get());
-                                output.accept(ModItems.IGNIVORUS_EGG.get());
-                                output.accept(ModItems.VOLITANS_EGG.get());
-                                output.accept(ModItems.ATROXIIA_EGG.get());
-                                output.accept(ModItems.IVY_OCTOPUS_PLUSHIE.get());
-                                output.accept(ModItems.SEARING_COAL.get());
-                                output.accept(ModItems.ANCIENT_DRAGONITE_FRAGMENT.get());
-                                output.accept(ModItems.DRAGON_SEAL_STONE.get());
-                                output.accept(ModItems.DRAGON_BINDER_CORE.get());
-                                output.accept(ModItems.RAW_WORLDROOT.get());
-                                output.accept(ModItems.WORLDROOT_INGOT.get());
-                                output.accept(ModItems.WORLDROOT_SWORD.get());
-                                output.accept(ModItems.WORLDROOT_PICKAXE.get());
-                                output.accept(ModItems.WORLDROOT_AXE.get());
-                                output.accept(ModItems.WORLDROOT_SHOVEL.get());
-                                output.accept(ModItems.WORLDROOT_HOE.get());
-                                output.accept(ModItems.DRAGONHEART_CHUNK.get());
-                                output.accept(ModItems.DRAGONHEART_ALLOY.get());
-                                output.accept(ModItems.ARROW_OF_VENOM.get());
-                                output.accept(ModArmors.DRACONIAN_HELMET.get());
-                                output.accept(ModArmors.DRACONIAN_CHESTPLATE.get());
-                                output.accept(ModArmors.DRACONIAN_LEGGINGS.get());
-                                output.accept(ModArmors.DRACONIAN_BOOTS.get());
-                                output.accept(ModArmors.BLOOD_TEMPEST_HELMET.get());
-                                output.accept(ModArmors.BLOOD_TEMPEST_CHESTPLATE.get());
-                                output.accept(ModArmors.BLOOD_TEMPEST_LEGGINGS.get());
-                                output.accept(ModArmors.BLOOD_TEMPEST_BOOTS.get());
-                                output.accept(ModItems.BLOOD_TEMPEST_KATANA.get());
-                                output.accept(ModArmors.DRAGONLORD_HELMET.get());
-                                output.accept(ModArmors.DRAGONLORD_CHESTPLATE.get());
-                                output.accept(ModArmors.DRAGONLORD_LEGGINGS.get());
-                                output.accept(ModArmors.DRAGONLORD_BOOTS.get());
-                                output.accept(ModItems.DRAGONLORD_SWORD.get());
-                                output.accept(ModPotionItems.POTION_OF_TIDEGUARD.get());
-                                output.accept(ModPotionItems.POTION_OF_SEARING.get());
-                                output.accept(ModItems.BLEEDING_BOLT_MUSIC_DISC.get());
-                                output.accept(ModItems.MOSSBACK_MUSIC_MUSIC_DISC.get());
-                                output.accept(ModItems.IGNIVORUS_INCUBATOR_BLOCK.get());
-                                output.accept(ModItems.DRAGONHEART_ORE.get());
-                                output.accept(ModItems.DRAGONHEART_ALLOY_BLOCK.get());
-                                output.accept(ModItems.DRAGONHEART_BLOCK.get());
-                                output.accept(ModItems.DEEPSLATE_WORLDROOT_ORE.get());
-                                output.accept(ModItems.WORLDROOT_BLOCK.get());
-                                output.accept(ModItems.RAW_WORLDROOT_BLOCK.get());
-                                output.accept(ModItems.DRACONIAN_PELLUCIDA.get());
-                                output.accept(ModItems.DRACONIAN_NUCLEUS.get());
-                                output.accept(ModItems.DRACONIC_CRUCIBLE.get());
-                                output.accept(ModItems.RAEVYX_SPAWN_EGG.get());
-                                output.accept(ModItems.CINDERVANE_SPAWN_EGG.get());
-                                output.accept(ModItems.STEGONAUT_SPAWN_EGG.get());
-                                output.accept(ModItems.VARASUCHUS_SPAWN_EGG.get());
-                                output.accept(ModItems.IGNIVORUS_SPAWN_EGG.get());
-                                output.accept(ModItems.VOLITANS_SPAWN_EGG.get());
-                                output.accept(ModItems.NULLJAW_SPAWN_EGG.get());
-                                output.accept(ModItems.ATROXIIA_SPAWN_EGG.get());
-                                output.accept(ModItems.MOSSBACK_SPAWN_EGG.get());
-                                output.accept(ModItems.LATCHER_SPAWN_EGG.get());
-                                output.accept(ModItems.WINGED_SPAWN_EGG.get());
-                                output.accept(ModItems.WHETTLED_SPAWN_EGG.get());
-                                output.accept(ModItems.DRACONIAN_SWARM_SPAWN_EGG.get());
-                                output.accept(ModItems.MOOP_SPAWN_EGG.get());
-                                output.accept(ModItems.IVY_THE_MERCHANT_SPAWN_EGG.get());
-                                })
-                            .build());
+    private SaintsCreativeTab() {
+    }
 
     public static void register() {
-        REGISTER.register();
+        // Loading this class creates and registers the 1.18.2 CreativeModeTab instance.
     }
 }
