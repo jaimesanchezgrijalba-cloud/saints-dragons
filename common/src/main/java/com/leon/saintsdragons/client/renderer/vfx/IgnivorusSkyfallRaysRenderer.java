@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.server.entity.ability.abilities.ignivorus.IgnivorusUltimateAbility;
 import com.leon.saintsdragons.server.entity.dragons.ignivorus.Ignivorus;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -8,7 +10,6 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 
@@ -30,7 +31,7 @@ public final class IgnivorusSkyfallRaysRenderer {
         float progress = 1.0F - remaining / CHARGE_TICKS;
         float collapse = Mth.clamp(remaining / COLLAPSE_TICKS, 0.0F, 1.0F);
         float intensity = Mth.clamp(progress * 5.0F, 0.0F, 1.0F) * collapse;
-        RandomSource random = RandomSource.create(dragon.getUUID().getLeastSignificantBits() ^ 432L);
+        Random random = new Random(dragon.getUUID().getLeastSignificantBits() ^ 432L);
         VertexConsumer buffer = buffers.getBuffer(RenderType.lightning());
         Vec3 offset = origin.subtract(dragon.getPosition(partialTick));
         poses.pushPose();

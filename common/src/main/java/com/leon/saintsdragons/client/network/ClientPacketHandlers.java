@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.network;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.camera.ClientCameraImpulse;
 import com.leon.saintsdragons.client.camera.BloodTempestKatanaVisuals;
 import com.leon.saintsdragons.client.camera.DragonlordFlightVisuals;
@@ -40,7 +42,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 
 import java.util.ArrayList;
@@ -168,7 +169,7 @@ public final class ClientPacketHandlers {
             return;
         }
 
-        RandomSource random = minecraft.level.random;
+        Random random = minecraft.level.random;
         for (int i = 0; i < 128; ++i) {
             double progress = (double) i / 127.0D;
             double x = Mth.lerp(progress, message.originX(), message.x())

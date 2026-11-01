@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.particle;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.particle.raevyx.RaevyxLightningChainData;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
@@ -10,7 +12,6 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -88,7 +89,7 @@ public class RaevyxLightningChainParticle extends TextureSheetParticle {
                                  long seed, float alphaScale, float jitterScale) {
         float[] lateralA = new float[8];
         float[] lateralB = new float[8];
-        RandomSource random = RandomSource.create(seed);
+        Random random = new Random(seed);
         float offsetA = 0.0F;
         float offsetB = 0.0F;
 

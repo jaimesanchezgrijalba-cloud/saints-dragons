@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.client.ui;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.client.camera.DragonDiveEffectIntensity;
 import com.leon.saintsdragons.client.camera.BloodTempestKatanaVisuals;
 import com.leon.saintsdragons.client.camera.DragonlordFlightVisuals;
@@ -10,7 +12,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public final class SpeedLineOverlay {
     private static final int LINE_COLOR = 0xFFFFFFFF;
 
     private final List<Line> lines = new ArrayList<>();
-    private final RandomSource random = RandomSource.create();
+    private final Random random = new Random();
 
     public void render(GuiGraphics graphics, int width, int height, float partialTicks) {
         Entity player = Minecraft.getInstance().player;
@@ -114,7 +115,7 @@ public final class SpeedLineOverlay {
             this.velocityY = velocityY;
         }
 
-        private static Line create(RandomSource random, int width, int height, float intensity) {
+        private static Line create(Random random, int width, int height, float intensity) {
             float centerX = width * 0.5F;
             float centerY = height * 0.5F;
             int edge = random.nextInt(4);

@@ -1,11 +1,12 @@
 package com.leon.saintsdragons.client.renderer.vfx;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -37,7 +38,7 @@ public final class AttachedBillboardFlipbookRenderer {
                     nextSpawnTime = time;
                 }
                 while (nextSpawnTime <= time) {
-                    RandomSource random = RandomSource.create(seed ^ PULSE_SEED * ++sequence);
+                    Random random = new Random(seed ^ PULSE_SEED * ++sequence);
                     float angle = -Mth.lerp(random.nextFloat(),
                             style.minimumRotationDegrees(), style.maximumRotationDegrees()) * Mth.DEG_TO_RAD;
                     float minimumRadius = Math.max(0.0F, style.minimumSpawnRadius());
