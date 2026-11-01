@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.npc.dialogue;
 
+import net.minecraft.core.Registry;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -12,7 +14,6 @@ import com.leon.saintsdragons.common.item.IvyOctopusPlushieItem;
 import com.leon.saintsdragons.common.registry.ModItems;
 import com.leon.saintsdragons.server.data.DragonCodexSavedData;
 import com.leon.saintsdragons.server.entity.npc.IvyTheDragonMerchant;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -474,7 +475,7 @@ public final class DialogueSessionRegistry {
             if (!(stack.getItem() instanceof AbstractDragonBinderItem<?>)) {
                 continue;
             }
-            String binderPath = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+            String binderPath = Registry.ITEM.getKey(stack.getItem()).getPath();
             if (!binderPath.endsWith("_binder")) {
                 continue;
             }

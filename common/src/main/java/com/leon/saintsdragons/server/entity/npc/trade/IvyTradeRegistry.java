@@ -1,11 +1,13 @@
 package com.leon.saintsdragons.server.entity.npc.trade;
 
+import net.minecraft.core.Registry;
+
 import java.util.Random;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.npc.AbstractVillager;
@@ -138,7 +140,7 @@ public final class IvyTradeRegistry {
 
     private static StackFactory parseStack(JsonObject object, ResourceLocation fileId) {
         ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(object, "item"));
-        Optional<Item> item = BuiltInRegistries.ITEM.getOptional(itemId);
+        Optional<Item> item = Optional.ofNullable(ForgeRegistries.ITEMS.getValue(itemId));
         if (item.isEmpty()) {
             throw new IllegalArgumentException("Unknown item " + itemId + " in " + fileId);
         }
@@ -179,7 +181,7 @@ public final class IvyTradeRegistry {
         for (JsonElement element : array) {
             JsonObject enchantmentJson = GsonHelper.convertToJsonObject(element, fileId + " enchantment");
             ResourceLocation id = new ResourceLocation(GsonHelper.getAsString(enchantmentJson, "id"));
-            Enchantment enchantment = BuiltInRegistries.ENCHANTMENT.getOptional(id)
+            Enchantment enchantment = Optional.ofNullable(ForgeRegistries.ENCHANTMENTS.getValue(id))
                     .orElseThrow(() -> new IllegalArgumentException("Unknown enchantment " + id + " in " + fileId));
             int level = GsonHelper.getAsInt(enchantmentJson, "level", 1);
             float chance = GsonHelper.getAsFloat(enchantmentJson, "chance", 1.0F);

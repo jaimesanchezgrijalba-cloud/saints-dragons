@@ -1,5 +1,7 @@
 // I know that we are upside down, so hold your tongue and hear me out
 
+import net.minecraft.core.Registry;
+
 package com.leon.saintsdragons.server.entity.npc;
 
 import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
@@ -31,7 +33,6 @@ import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -2262,7 +2263,7 @@ public class IvyTheDragonMerchant extends AbstractVillager implements TickingGeo
         if (stack.isEmpty() || !stack.isEdible()) {
             return false;
         }
-        ResourceLocation id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        ResourceLocation id = Registry.ITEM.getKey(stack.getItem());
         return id != null && id.getPath().contains("cooked");
     }
 

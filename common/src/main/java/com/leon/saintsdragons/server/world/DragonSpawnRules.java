@@ -1,11 +1,12 @@
 package com.leon.saintsdragons.server.world;
 
+import net.minecraft.core.Registry;
+
 import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import com.leon.saintsdragons.server.data.RaevyxStormSavedData;
 import com.leon.saintsdragons.server.entity.dragons.cindervane.Cindervane;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;
@@ -36,7 +37,7 @@ public final class DragonSpawnRules {
         for (var entry : level.getBiome(pos).value().getMobSettings().getMobs(MobCategory.CREATURE).unwrap()) {
             int weight = entry.getWeight().asInt();
             if (weight <= 0 || entry.maxCount <= 0
-                    || BuiltInRegistries.ENTITY_TYPE.getKey(entry.type).getNamespace().equals("saintsdragons")) continue;
+                    || Registry.ENTITY_TYPE.getKey(entry.type).getNamespace().equals("saintsdragons")) continue;
             competingWeight += weight;
             if (competingWeight >= MIN_COMPETING_CREATURE_WEIGHT) return true;
         }

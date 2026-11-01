@@ -1,7 +1,8 @@
 package com.leon.saintsdragons.server.entity.handler;
 
+import net.minecraft.core.Registry;
+
 import com.leon.saintsdragons.server.entity.interfaces.HumanSoundProfile;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -113,7 +114,7 @@ public class HumanSoundHandler {
         try {
             ResourceLocation rl = ResourceLocation.tryParse(soundId);
             if (rl != null) {
-                SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(rl);
+                SoundEvent sound = Registry.SOUND_EVENT.get(rl);
                 Vec3 position = resolveLocator(locator);
                 playSoundImmediate(sound, position, volume, pitch);
             }
