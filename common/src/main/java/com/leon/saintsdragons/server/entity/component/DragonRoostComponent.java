@@ -5,12 +5,13 @@ import com.leon.saintsdragons.server.entity.base.DragonEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Marker;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -26,7 +27,7 @@ public final class DragonRoostComponent {
     private static final String SLEEP_ANCHOR_TAG = "saintsdragons.sleep_anchor";
 
     private final DragonEntity dragon;
-    private final ResourceKey<Structure> roostStructure;
+    private final ResourceKey<ConfiguredStructureFeature<?, ?>> roostStructure;
     private final double sleepRadiusSqr;
     private final double territoryRadius;
     private final int requiredSleepSettleTicks;
@@ -39,7 +40,7 @@ public final class DragonRoostComponent {
     private boolean sleepAnchorResolved;
 
     public DragonRoostComponent(DragonEntity dragon,
-                                ResourceKey<Structure> roostStructure,
+                                ResourceKey<ConfiguredStructureFeature<?, ?>> roostStructure,
                                 double sleepRadius,
                                 double territoryRadius,
                                 int requiredSleepSettleTicks) {

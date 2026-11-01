@@ -69,7 +69,6 @@ import com.leon.saintsdragons.server.entity.interfaces.ScentAssessingDragon;
 import com.leon.saintsdragons.server.loot.DragonLootTables;
 import com.leon.saintsdragons.server.world.DragonSpawnRules;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -95,6 +94,8 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -102,7 +103,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.Mth;
 import net.minecraft.nbt.CompoundTag;
@@ -129,8 +129,8 @@ import java.util.function.Supplier;
 public class Ignivorus extends RideableFlyingDragon implements ShakesScreen, DragonAirCombatSettingsProvider,
         PassiveTreeDestroyer, DrinkingDragon, ScentAssessingDragon, DragonCombatLearner {
     private static final IgnivorusBrain DRAGON_BRAIN = new IgnivorusBrain();
-    private static final ResourceKey<Structure> IGNIVORUS_ROOST_STRUCTURE = ResourceKey.create(
-            Registries.STRUCTURE,
+    private static final ResourceKey<ConfiguredStructureFeature<?, ?>> IGNIVORUS_ROOST_STRUCTURE = ResourceKey.create(
+            Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY,
             SaintsDragonsCommon.rl("ignivorus_roost")
     );
 

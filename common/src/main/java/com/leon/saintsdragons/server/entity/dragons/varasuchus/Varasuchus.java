@@ -50,13 +50,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -75,7 +76,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -97,8 +97,8 @@ import java.util.function.Supplier;
 public class Varasuchus extends RideableGroundDragon implements SemiAquaticDragon, ShakesScreen,
         PassiveTreeDestroyer, ScentAssessingDragon {
     private static final VarasuchusBrain DRAGON_BRAIN = new VarasuchusBrain();
-    private static final ResourceKey<Structure> VARASUCHUS_ROOST_STRUCTURE = ResourceKey.create(
-            Registries.STRUCTURE,
+    private static final ResourceKey<ConfiguredStructureFeature<?, ?>> VARASUCHUS_ROOST_STRUCTURE = ResourceKey.create(
+            Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY,
             SaintsDragonsCommon.rl("varasuchus_roost")
     );
     public static final double ROOST_SLEEP_RADIUS = VarasuchusStatProfile.Entity.ROOST_SLEEP_RADIUS;
