@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
@@ -57,7 +57,7 @@ public final class DragonChestLootRegistry {
     private static Entry parseEntry(ResourceLocation fileId, JsonObject entry) {
         ResourceLocation lootTable = new ResourceLocation(GsonHelper.getAsString(entry, "loot_table"));
         ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(entry, "item"));
-        Optional<Item> item = BuiltInRegistries.ITEM.getOptional(itemId);
+        Optional<Item> item = Optional.ofNullable(ForgeRegistries.ITEMS.getValue(itemId));
         if (item.isEmpty()) {
             throw new IllegalArgumentException("Unknown item " + itemId + " in " + fileId);
         }

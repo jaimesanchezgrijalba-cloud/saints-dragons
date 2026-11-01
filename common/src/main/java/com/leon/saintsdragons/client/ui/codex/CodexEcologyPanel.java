@@ -6,7 +6,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -260,7 +260,7 @@ public class CodexEcologyPanel {
         int itemY = startY + 10;
         int rowGap = 18;
 
-        for (Holder<Item> holder : BuiltInRegistries.ITEM.getTagOrEmpty(foods)) {
+        for (Holder<Item> holder : Registry.ITEM.getTagOrEmpty(foods)) {
             ItemStack stack = new ItemStack(holder.value());
             guiGraphics.renderItem(stack, itemX, itemY);
             guiGraphics.drawString(font, stack.getHoverName().getString(), itemX + 18, itemY + 4,
