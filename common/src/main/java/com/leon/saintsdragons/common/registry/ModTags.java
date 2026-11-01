@@ -1,7 +1,8 @@
 package com.leon.saintsdragons.common.registry;
 
+
+import net.minecraft.core.Registry;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -34,7 +35,7 @@ public final class ModTags {
         }
 
         private static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, SaintsDragonsCommon.rl(name));
+            return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, SaintsDragonsCommon.rl(name));
         }
     }
 
@@ -75,7 +76,7 @@ public final class ModTags {
         }
 
         private static TagKey<Item> tag(String name) {
-            return TagKey.create(Registries.ITEM, SaintsDragonsCommon.rl(name));
+            return TagKey.create(Registry.ITEM_REGISTRY, SaintsDragonsCommon.rl(name));
         }
     }
 
@@ -93,7 +94,7 @@ public final class ModTags {
         }
 
         private static TagKey<Block> tag(String name) {
-            return TagKey.create(Registries.BLOCK, SaintsDragonsCommon.rl(name));
+            return TagKey.create(Registry.BLOCK_REGISTRY, SaintsDragonsCommon.rl(name));
         }
     }
 
@@ -117,7 +118,7 @@ public final class ModTags {
         }
 
         private static TagKey<Biome> tag(String name) {
-            return TagKey.create(Registries.BIOME, SaintsDragonsCommon.rl(name));
+            return TagKey.create(Registry.BIOME_REGISTRY, SaintsDragonsCommon.rl(name));
         }
     }
 }

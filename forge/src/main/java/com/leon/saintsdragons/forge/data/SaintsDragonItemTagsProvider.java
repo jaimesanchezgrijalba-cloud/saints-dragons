@@ -1,12 +1,12 @@
 package com.leon.saintsdragons.forge.data;
 
+import net.minecraft.core.Registry;
+
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.registry.ConventionalTags;
 import com.leon.saintsdragons.common.registry.ModArmors;
 import com.leon.saintsdragons.common.registry.ModItems;
 import com.leon.saintsdragons.common.registry.ModTags;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
@@ -23,8 +23,8 @@ import java.util.concurrent.CompletableFuture;
 
 public final class SaintsDragonItemTagsProvider extends ItemTagsProvider {
     private static final TagKey<Item> MINECRAFT_EGGS = TagKey.create(
-            Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath("minecraft", "eggs")
+            Registry.ITEM_REGISTRY,
+            new ResourceLocation("minecraft", "eggs")
     );
 
     public SaintsDragonItemTagsProvider(

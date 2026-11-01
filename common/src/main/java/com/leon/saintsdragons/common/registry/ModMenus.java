@@ -6,17 +6,16 @@ import com.leon.saintsdragons.platform.Services;
 import com.leon.saintsdragons.server.menu.IvyInventoryMenu;
 import com.leon.saintsdragons.server.menu.DragonInventoryMenu;
 import com.leon.saintsdragons.server.menu.DraconicCrucibleMenu;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 
 import java.util.function.Supplier;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public final class ModMenus {
     private static final RegistryHelper.RegistryWrapper<MenuType<?>> REGISTER =
             Services.PLATFORM.getRegistryHelper()
-                    .create(Registries.MENU, () -> BuiltInRegistries.MENU, SaintsDragonsCommon.MOD_ID);
+                    .create(ForgeRegistries.Keys.CONTAINER_TYPES, () -> null, SaintsDragonsCommon.MOD_ID);
 
     public static final Supplier<MenuType<DragonInventoryMenu>> DRAGON_INVENTORY =
             REGISTER.register("dragon_inventory",

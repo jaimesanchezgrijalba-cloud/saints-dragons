@@ -1,6 +1,7 @@
 package com.leon.saintsdragons.common.registry;
 
-import net.minecraft.core.registries.Registries;
+
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -20,7 +21,7 @@ public final class ConventionalTags {
         }
 
         private static TagKey<Block> tag(String path) {
-            return TagKey.create(Registries.BLOCK, id(path));
+            return TagKey.create(Registry.BLOCK_REGISTRY, id(path));
         }
     }
 
@@ -35,7 +36,7 @@ public final class ConventionalTags {
         }
 
         private static TagKey<Item> tag(String path) {
-            return TagKey.create(Registries.ITEM, id(path));
+            return TagKey.create(Registry.ITEM_REGISTRY, id(path));
         }
     }
 
@@ -47,7 +48,7 @@ public final class ConventionalTags {
         }
 
         private static TagKey<Biome> tag(String path) {
-            return TagKey.create(Registries.BIOME, id(path));
+            return TagKey.create(Registry.BIOME_REGISTRY, id(path));
         }
     }
 
