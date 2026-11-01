@@ -1,4 +1,6 @@
 // zap van dink
+
+import java.util.Random;
 package com.leon.saintsdragons.server.entity.dragons.raevyx;
 
 import com.leon.saintsdragons.server.entity.component.DragonBreathPose;
@@ -63,7 +65,6 @@ import com.leon.saintsdragons.util.animation.EntityAnimationController;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.Mth;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -2411,7 +2412,7 @@ public class Raevyx extends RideableFlyingDragon implements ShakesScreen, Dragon
                                        LevelAccessor level,
                                        MobSpawnType reason,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         if (SaintsDragonsConfig.isRaevyxCustomSpawningEnabled()
                 && DragonSpawnRules.isNaturalWildSpawn(reason)
                 && !DragonSpawnRules.hasWildRaevyxStorm(level)) {
@@ -2769,7 +2770,7 @@ public class Raevyx extends RideableFlyingDragon implements ShakesScreen, Dragon
         }
         return new Vec3(sample.x, groundPos.getY() + 1.02D, sample.z);
     }
-    private static Vec3 randomUnit(RandomSource rnd) {
+    private static Vec3 randomUnit(Random rnd) {
         double u = rnd.nextDouble();
         double v = rnd.nextDouble();
         double theta = 2 * Math.PI * u;

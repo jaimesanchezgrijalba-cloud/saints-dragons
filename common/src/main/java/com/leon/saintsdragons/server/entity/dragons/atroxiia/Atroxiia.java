@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.dragons.atroxiia;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.AtroxiiaStatProfile;
 import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonVisionProfile;
 
@@ -48,7 +50,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
@@ -249,7 +250,7 @@ public class Atroxiia extends RideableGroundDragon implements ShakesScreen, Pass
                                        LevelAccessor level,
                                        MobSpawnType spawnType,
                                        BlockPos pos,
-                                       RandomSource random) {
+                                       Random random) {
         return DragonSpawnRules.hasDryGroundSpawnSpace(level, pos)
                 && DragonSpawnRules.passesNearbyDragonDensityCheck(level, spawnType, pos, Atroxiia.class);
     }

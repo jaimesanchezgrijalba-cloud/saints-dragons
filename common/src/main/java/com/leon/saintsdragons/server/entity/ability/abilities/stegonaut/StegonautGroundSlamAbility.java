@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.stegonaut;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.StegonautStatProfile;
 
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
@@ -19,7 +21,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
@@ -309,7 +310,7 @@ public class StegonautGroundSlamAbility extends DragonAbility<Stegonaut> {
     }
 
     private void spawnDustBurst(ServerLevel server, Stegonaut dragon, boolean slam2) {
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         double radius = slam2 ? 7.0D : 5.0D;
         int dustCount = slam2 ? 70 : 42;
         int dirtCount = slam2 ? 38 : 0;

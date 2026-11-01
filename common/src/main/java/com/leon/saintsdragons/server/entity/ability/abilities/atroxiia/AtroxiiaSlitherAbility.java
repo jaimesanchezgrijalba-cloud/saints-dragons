@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.atroxiia;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.AtroxiiaStatProfile;
 
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
@@ -12,7 +14,6 @@ import com.leon.saintsdragons.server.entity.dragons.atroxiia.Atroxiia;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
@@ -188,7 +189,7 @@ public final class AtroxiiaSlitherAbility extends DragonAbility<Atroxiia> {
             return;
         }
 
-        RandomSource random = dragon.getRandom();
+        Random random = dragon.getRandom();
         Vec3 forward = Vec3.directionFromRotation(0.0F, dragon.getYRot()).normalize();
         Vec3 right = new Vec3(-forward.z, 0.0D, forward.x);
         double footprintWidth = Math.max(1.0D, dragon.getBbWidth() * 0.8D);
@@ -205,7 +206,7 @@ public final class AtroxiiaSlitherAbility extends DragonAbility<Atroxiia> {
 
     private void spawnTrailParticle(ServerLevel server,
                                     Atroxiia dragon,
-                                    RandomSource random,
+                                    Random random,
                                     Vec3 forward,
                                     Vec3 right,
                                     double footprintWidth,

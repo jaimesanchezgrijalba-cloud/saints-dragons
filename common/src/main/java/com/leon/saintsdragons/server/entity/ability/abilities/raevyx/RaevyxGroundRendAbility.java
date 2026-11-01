@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.ability.abilities.raevyx;
 
+import java.util.Random;
+
 import com.leon.saintsdragons.common.config.dragon.profile.RaevyxStatProfile;
 
 import com.leon.saintsdragons.common.registry.ModParticles;
@@ -18,7 +20,6 @@ import com.leon.saintsdragons.server.entity.ability.DragonAbilitySection.Ability
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -393,7 +394,7 @@ public class RaevyxGroundRendAbility extends DragonAbility<Raevyx> {
             return;
         }
 
-        RandomSource random = wyvern.getRandom();
+        Random random = wyvern.getRandom();
         Vec3 forward = getForwardDir(wyvern);
         double radius = Math.max(wyvern.getBbWidth() * radiusScale, 1.4D);
         double y = wyvern.getBoundingBox().minY + 0.08D;
@@ -423,7 +424,7 @@ public class RaevyxGroundRendAbility extends DragonAbility<Raevyx> {
             return;
         }
 
-        RandomSource random = wyvern.getRandom();
+        Random random = wyvern.getRandom();
         Vec3 forward = getForwardDir(wyvern);
         Vec3 right = new Vec3(-forward.z, 0.0D, forward.x);
         double radius = Math.max(wyvern.getBbWidth() * 0.55D, 1.15D);
