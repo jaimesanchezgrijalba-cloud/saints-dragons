@@ -70,7 +70,7 @@ public final class DragonHearingListener {
             return false;
         }
 
-        Vec3 approximatePosition = addUncertainty(eventPosition, confidence);
+        Vec3 approximatePosition = addUncertainty(eventPositionVec, confidence);
         boolean unresolvedProjectile = stimulus.kind() == DragonSensoryObservation.Kind.PROJECTILE
                 && (!(source instanceof LivingEntity living) || !dragon.getVision().recognizes(living));
         UUID sourceUuid = unresolvedProjectile || source == null ? null : source.getUUID();
@@ -94,7 +94,7 @@ public final class DragonHearingListener {
         if (event == GameEvent.PROJECTILE_LAND
                 && source instanceof LivingEntity
                 && sourceUuid != null
-                && isDangerousProjectileImpact(eventPosition)) {
+                && isDangerousProjectileImpact(eventPositionVec)) {
             UUID projectileUuid = eventSource != null && eventSource != source
                     ? eventSource.getUUID()
                     : null;
